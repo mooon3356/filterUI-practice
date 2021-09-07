@@ -1,13 +1,24 @@
-import styled from "styled-components";
+import axios from "axios";
+import { useEffect } from "react";
+import useDashboard from "../hooks/useDashboard";
 
 function DashboardPage() {
-  return <Title>hello</Title>;
+  const { data, onStoreData } = useDashboard();
+
+  useEffect(() => {
+    axios.get("http://localhost:4000/requests").then((data) => {
+      onStoreData(data.data);
+    });
+  }, []);
+
+  console.log(data);
+
+  return (
+    <div>
+      <div></div>
+      <div></div>
+    </div>
+  );
 }
 
 export default DashboardPage;
-
-const Title = styled.div`
-  color: ${(props) => {
-    return props.theme.primary[500];
-  }};
-`;
