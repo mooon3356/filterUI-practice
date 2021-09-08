@@ -1,46 +1,22 @@
-import axios from "axios";
-import { useEffect } from "react";
-import RequestCard from "../components/RequestCard";
-// import Button from "../components/Button";
-// import Nav from "../components/Nav";
-import useDashboard from "../hooks/useDashboard";
+import Nav from "../components/Nav";
 import styled from "styled-components";
-import { Data } from "../types/reducer";
+import RequestCardList from "../containers/RequestCardList";
 
 function DashboardPage() {
-  const { data, onStoreData } = useDashboard();
-
-  useEffect(() => {
-    axios.get("http://localhost:4000/requests").then((data) => {
-      onStoreData(data.data);
-    });
-  }, []);
-
-  if (!data.data) {
-    return <div>없음</div>;
-  } else {
-    return (
-      <Container>
-        {data.data.map((el) => (
-          <RequestCard
-            key={el.id}
-            id={el.id}
-            title={el.title}
-            client={el.client}
-            due={el.due}
-            count={el.count}
-            amount={el.amount}
-            method={el.method}
-            material={el.material}
-            status={el.status}
-          ></RequestCard>
-        ))}
-      </Container>
-    );
-  }
+  return (
+    <Container>
+      <Nav></Nav>
+      <RequestCardList></RequestCardList>
+    </Container>
+  );
 }
 
 export default DashboardPage;
 
 const Container = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
 `;

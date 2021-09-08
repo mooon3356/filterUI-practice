@@ -5,11 +5,13 @@ const GlobalStyle = createGlobalStyle`
     ${normalize}
     
     html {
-        font-size: 10px;
+        font-size: 10px; 
     }
     
     body {
       margin: 0;
+      width: 100%;
+      height: 100%;
     }
       
     code {

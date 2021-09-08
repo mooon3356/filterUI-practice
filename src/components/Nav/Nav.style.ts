@@ -4,7 +4,7 @@ export const Wrapper = styled.div`
   position: absolute;
   top: 0%;
   width: 100%;
-  height: 6rem;
+  height: 5rem;
   background: ${(props) => props.theme.primary[700]};
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.24);
   display: flex;
@@ -23,6 +23,7 @@ export const Wrapper = styled.div`
 
   .logo {
     padding-left: 3rem;
+    width: 16rem;
   }
 
   .vertor {
@@ -34,7 +35,7 @@ export const Wrapper = styled.div`
   .client {
     font-style: normal;
     font-weight: 500;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     line-height: 2rem;
     color: ${(props) => props.theme.gray.light};
   }
@@ -47,7 +48,7 @@ export const Wrapper = styled.div`
   .logout {
     font-style: normal;
     font-weight: normal;
-    font-size: 14px;
+    font-size: 1.3rem;
     line-height: 20px;
     color: #ffffff;
   }

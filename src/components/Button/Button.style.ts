@@ -8,15 +8,15 @@ const sizeStyles = css<SizeType>`
   ${({ size }) =>
     size === "small" &&
     css`
-      width: 4.5rem;
-      height: 2rem;
+      width: 6rem;
+      height: 3rem;
     `}
 
   ${({ size }) =>
     size === "medium" &&
     css`
-      width: 6rem;
-      height: 2rem;
+      width: 8.5rem;
+      height: 3rem;
     `}
 `;
 
@@ -41,7 +41,7 @@ const colorStyles = css<ColorType>`
 export const Wrapper = styled.button<ButtonProps>`
   border-radius: 2px;
   padding: 0.5rem;
-  font-size: 0.8rem;
+  font-size: 1.2rem;
   cursor: pointer;
   font-weight: 500;
 
