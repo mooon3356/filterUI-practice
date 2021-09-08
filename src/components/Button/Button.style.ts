@@ -8,15 +8,15 @@ const sizeStyles = css<SizeType>`
   ${({ size }) =>
     size === "small" &&
     css`
-      width: 10.8rem;
-      height: 3.2rem;
+      width: 4.5rem;
+      height: 2rem;
     `}
 
   ${({ size }) =>
     size === "medium" &&
     css`
-      width: 8rem;
-      height: 3.2rem;
+      width: 6rem;
+      height: 2rem;
     `}
 `;
 
@@ -26,7 +26,7 @@ const colorStyles = css<ColorType>`
     css`
       background: ${(props) => props.theme.primary[500]};
       color: ${(props) => props.theme.gray.light};
-      border: none;
+      border: 1px solid ${(props) => props.theme.primary[500]};
     `}
 
   ${({ color }) =>
@@ -39,10 +39,11 @@ const colorStyles = css<ColorType>`
 `;
 
 export const Wrapper = styled.button<ButtonProps>`
-  border-radius: 4px;
-  padding: 0.6rem 1.2rem 0.6rem 1.2rem;
-  font-size: 1.4rem;
+  border-radius: 2px;
+  padding: 0.5rem;
+  font-size: 0.8rem;
   cursor: pointer;
+  font-weight: 500;
 
   ${sizeStyles};
   ${colorStyles};

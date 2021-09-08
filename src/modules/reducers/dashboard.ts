@@ -2,7 +2,7 @@ import { storeData, STOREDATA } from "../actions/index";
 import { Data } from "../../types/reducer";
 
 export type DashboardState = {
-  data: Data | null;
+  data: Data[] | null;
 };
 
 export const initialState = {

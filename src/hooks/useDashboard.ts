@@ -7,7 +7,7 @@ function useDashboard() {
   const data = useSelector((state: RootState) => state.dashboard);
   const dispatch = useDispatch();
 
-  const onStoreData = (data: Data) => dispatch(storeData(data));
+  const onStoreData = (data: Data[]) => dispatch(storeData(data));
 
   return { data, onStoreData };
 }
