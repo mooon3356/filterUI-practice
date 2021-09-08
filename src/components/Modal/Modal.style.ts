@@ -9,6 +9,9 @@ const modalStyles = css<ModalType>`
     css`
       width: 13rem;
       height: 16.4rem;
+      top: 15rem;
+      left: 27.1rem;
+      border-radius: 4px;
     `}
 
   ${({ type }) =>
@@ -16,6 +19,9 @@ const modalStyles = css<ModalType>`
     css`
       width: 13rem;
       height: 8rem;
+      top: 15rem;
+      left: 13.1rem;
+      border-radius: 4px;
     `}
 
     ${({ type }) =>
@@ -52,11 +58,11 @@ export const Wrapper = styled.div<ModalProps>`
       props.type === "filter-material" || "filter-method" ? null : "blur(3px);"}
 `;
 
-export const ModalBox = styled.div`
+export const ModalBox = styled.div<ModalType>`
   ${modalStyles};
 
-  position: relative;
-  padding: 2.5rem;
+  position: absolute;
+  padding: 1.5rem 0 0 1.5rem;
   background-color: ${(props) => props.theme.gray.light};
   border: 1px solid ${(props) => props.theme.border.gray};
 `;

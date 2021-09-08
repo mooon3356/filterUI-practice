@@ -3,45 +3,52 @@ import RequestCardList from "../containers/RequestCardList";
 import { useState } from "react";
 import Modal from "../components/Modal";
 import Button from "../components/Button";
+import CheckList from "../components/CheckList";
 
 function DashboardPage() {
   const [isOpen, setIsOpen] = useState(false);
+  const [modalType, setModalType] = useState("");
 
   return (
     <Container>
       <div className="filter-box">
         <Button
           className="filter-btn method"
-          handler={() => setIsOpen(!isOpen)}
+          handler={() => {
+            setIsOpen(!isOpen);
+            setModalType("method");
+          }}
         >
           가공방식
         </Button>
         <Button
           className="filter-btn material"
-          handler={() => setIsOpen(!isOpen)}
+          handler={() => {
+            setIsOpen(!isOpen);
+            setModalType("material");
+          }}
         >
           재료
         </Button>
       </div>
       <RequestCardList></RequestCardList>
+
       {isOpen ? (
-        <Modal
-          type="filter-method"
-          isOpen={isOpen}
-          handleModal={() => setIsOpen(!isOpen)}
-          component={
-            <div>
-              <label>
-                <input type="checkbox" name="밀링" value="밀링" />
-                밀링
-              </label>
-              <label>
-                <input type="checkbox" name="선반" value="선반" />
-                선반
-              </label>
-            </div>
-          }
-        ></Modal>
+        modalType === "method" ? (
+          <Modal
+            type="filter-method"
+            isOpen={isOpen}
+            handleModal={() => setIsOpen(!isOpen)}
+            component={<CheckList type="method"></CheckList>}
+          ></Modal>
+        ) : (
+          <Modal
+            type="filter-material"
+            isOpen={isOpen}
+            handleModal={() => setIsOpen(!isOpen)}
+            component={<CheckList type="meterial"></CheckList>}
+          ></Modal>
+        )
       ) : null}
     </Container>
   );
