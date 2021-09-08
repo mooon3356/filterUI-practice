@@ -13,12 +13,6 @@ function RequestCardList() {
     });
   }, []);
 
-  let test = data.data
-
-  let selected = ['알류미늄', '다이아몬드']
-
-  console.log(test)
-
   if (!data.data) {
     return <div>없음</div>;
   } else {
@@ -46,8 +40,9 @@ function RequestCardList() {
 export default RequestCardList;
 
 const Container = styled.div`
+  gap: 2rem;
+  margin-top: 2rem;
+  width: 70%;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  margin-bottom: 3rem;
+  grid-template-columns: 1fr 1fr 1fr;
 `;

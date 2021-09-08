@@ -3,7 +3,7 @@ import { ModalBox, Wrapper } from "./Modal.style";
 
 export type ModalProps = {
   isOpen: boolean;
-  handleModal?: () => void;
+  handleModal: () => void;
   component?: Component | ReactElement;
 };
 
