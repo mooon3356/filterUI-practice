@@ -26,9 +26,21 @@ function DashboardPage() {
       <RequestCardList></RequestCardList>
       {isOpen ? (
         <Modal
+          type="filter-method"
           isOpen={isOpen}
           handleModal={() => setIsOpen(!isOpen)}
-          component={<div>hello</div>}
+          component={
+            <div>
+              <label>
+                <input type="checkbox" name="밀링" value="밀링" />
+                밀링
+              </label>
+              <label>
+                <input type="checkbox" name="선반" value="선반" />
+                선반
+              </label>
+            </div>
+          }
         ></Modal>
       ) : null}
     </Container>

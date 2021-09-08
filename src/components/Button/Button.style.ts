@@ -39,12 +39,12 @@ const colorStyles = css<ColorType>`
 `;
 
 export const Wrapper = styled.button<ButtonProps>`
+  ${sizeStyles};
+  ${colorStyles};
+  
   border-radius: 2px;
   padding: 0.5rem;
   font-size: 1.2rem;
   cursor: pointer;
   font-weight: 500;
-
-  ${sizeStyles};
-  ${colorStyles};
 `;
