@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect } from "react";
+import Nav from '../components/Nav';
 import useDashboard from "../hooks/useDashboard";
 
 function DashboardPage() {
@@ -15,8 +16,7 @@ function DashboardPage() {
 
   return (
     <div>
-      <div></div>
-      <div></div>
+      {/* <Nav></Nav> */}
     </div>
   );
 }
