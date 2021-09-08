@@ -12,6 +12,13 @@ function RequestCardList() {
       onStoreData(data.data);
     });
   }, []);
+
+  let test = data.data
+
+  let selected = ['알류미늄', '다이아몬드']
+
+  console.log(test)
+
   if (!data.data) {
     return <div>없음</div>;
   } else {

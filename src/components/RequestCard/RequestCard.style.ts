@@ -29,9 +29,9 @@ export const Wrapper = styled.div`
     display: flex;
     align-items: center;
     border-radius: 1.2rem;
-    padding: 0 0.5rem;
-    font-size: 0.8rem;
-    height: 1.6rem;
+    padding: 0 0.8rem;
+    font-size: 1.1rem;
+    height: 1.8rem;
     border: 1px solid ${(props) => props.theme.orange.normal};
     color: ${(props) => props.theme.orange.normal};
   }
