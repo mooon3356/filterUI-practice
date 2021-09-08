@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect } from "react";
-import Nav from '../components/Nav';
+// import Button from "../components/Button";
+// import Nav from "../components/Nav";
 import useDashboard from "../hooks/useDashboard";
 
 function DashboardPage() {
@@ -14,11 +15,7 @@ function DashboardPage() {
 
   console.log(data);
 
-  return (
-    <div>
-      {/* <Nav></Nav> */}
-    </div>
-  );
+  return <div></div>;
 }
 
 export default DashboardPage;
