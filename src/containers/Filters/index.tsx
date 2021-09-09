@@ -1,5 +1,5 @@
 import Button from "../../components/Button";
-import CheckList from "../../components/CheckList";
+import CheckList from "../../containers/CheckList";
 import Modal from "../../components/Modal";
 import styled from "styled-components";
 import { useState } from "react";
@@ -17,11 +17,11 @@ function FiltersContainer({
   modalType,
   setModalType,
 }: FiltersContainerType) {
-  const [checkList, setCheckList] = useState({
+  const [checkedList, setCheckedList] = useState({
     method: [""],
     material: [""],
   });
-  const { method, material } = checkList;
+  const { method, material } = checkedList;
 
   const handleCheck = (e: any) => {
     const type = e.target.name;
@@ -29,22 +29,24 @@ function FiltersContainer({
 
     if (method.includes(value)) {
       const filtered = method.filter((el) => el !== value);
-      setCheckList({ ...checkList, method: filtered });
+      setCheckedList({ ...checkedList, method: filtered });
       return;
     }
 
     if (material.includes(value)) {
       const filtered = material.filter((el) => el !== value);
-      setCheckList({ ...checkList, material: filtered });
+      setCheckedList({ ...checkedList, material: filtered });
       return;
     }
 
     if (type === "method") {
-      setCheckList({ ...checkList, method: [...method, value] });
+      setCheckedList({ ...checkedList, method: [...method, value] });
     } else if (type === "material") {
-      setCheckList({ ...checkList, material: [...material, value] });
+      setCheckedList({ ...checkedList, material: [...material, value] });
     }
   };
+
+  console.log(method);
 
   return (
     <Container>
@@ -74,7 +76,11 @@ function FiltersContainer({
             isOpen={isOpen}
             handleModal={() => setIsOpen(!isOpen)}
             component={
-              <CheckList type="method" handleCheck={handleCheck}></CheckList>
+              <CheckList
+                checkedList={checkedList}
+                type="method"
+                handleCheck={handleCheck}
+              ></CheckList>
             }
           ></Modal>
         ) : (
@@ -83,7 +89,11 @@ function FiltersContainer({
             isOpen={isOpen}
             handleModal={() => setIsOpen(!isOpen)}
             component={
-              <CheckList type="meterial" handleCheck={handleCheck}></CheckList>
+              <CheckList
+                checkedList={checkedList}
+                type="meterial"
+                handleCheck={handleCheck}
+              ></CheckList>
             }
           ></Modal>
         )
