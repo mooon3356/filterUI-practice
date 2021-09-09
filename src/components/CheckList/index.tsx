@@ -2,43 +2,69 @@ import styled from "styled-components";
 
 type CheckListProps = {
   type: string;
+  handleCheck: (e: any) => void;
 };
 
-function CheckList({ type }: CheckListProps) {
+function CheckList({ type, handleCheck }: CheckListProps) {
   if (type === "method") {
     return (
-      <Wrapper>
+      <Wrapper onClick={handleCheck}>
         <label>
-          <input className="check" type="checkbox" value="밀링"/>
+          <input className="check" type="checkbox" name="method" value="밀링" />
           밀링
         </label>
         <label>
-          <input className="check" type="checkbox" value="선반" />
+          <input className="check" type="checkbox" name="method" value="선반" />
           선반
         </label>
       </Wrapper>
     );
   } else {
     return (
-      <Wrapper>
+      <Wrapper onClick={handleCheck}>
         <label>
-          <input className="check" type="checkbox" value="알루미늄" />
+          <input
+            className="check"
+            type="checkbox"
+            name="material"
+            value="알루미늄"
+          />
           알루미늄
         </label>
         <label>
-          <input className="check" type="checkbox" value="탄소강" />
+          <input
+            className="check"
+            type="checkbox"
+            name="material"
+            value="탄소강"
+          />
           탄소강
         </label>
         <label>
-          <input className="check" type="checkbox" value="구리" />
+          <input
+            className="check"
+            type="checkbox"
+            name="material"
+            value="구리"
+          />
           구리
         </label>
         <label>
-          <input className="check" type="checkbox" value="합금강" />
+          <input
+            className="check"
+            type="checkbox"
+            name="material"
+            value="합금강"
+          />
           합금강
         </label>
         <label>
-          <input className="check" type="checkbox" value="강철" />
+          <input
+            className="check"
+            type="checkbox"
+            name="material"
+            value="강철"
+          />
           강철
         </label>
       </Wrapper>
