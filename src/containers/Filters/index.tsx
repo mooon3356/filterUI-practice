@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import Filter from "../../components/Filter";
 import useDashboard from "../../hooks/useDashboard";
+import Button from "../../components/Button";
+import { reset } from "../../images";
 
 export type CheckedListType = {
   method: {
@@ -64,11 +66,12 @@ function FiltersContainer({
     }
   };
 
+  const handleReset = () => {
+    setCheckedList({method: {}, material: {}})
+  };
+
   useEffect(() => {
-    if (methodCount !== 0 || materialCount !== 0) {
-      onCheckFilter({ ...method, ...material });
-      console.log('filter 디스패치 실행')
-    }
+    onCheckFilter({ ...method, ...material });
   }, [checkedList]);
 
   return (
@@ -103,6 +106,12 @@ function FiltersContainer({
           </span>
         }
       ></Filter>
+      <div className="reset-box">
+        <img className="reset-icon" src={reset}></img>
+        <Button handler={handleReset} size="medium" className="reset" color={"white"}>
+          필터링 리셋
+        </Button>
+      </div>
 
       {isOpen ? (
         modalType === "method" ? (
@@ -140,9 +149,26 @@ function FiltersContainer({
 export default FiltersContainer;
 
 const Container = styled.div`
-  width: 70%;
+  width: 60%;
+  position: relative;
+  display: flex;
+  align-items: center;
 
   .filter {
     margin-right: 1rem;
+  }
+
+  .reset-box {
+    margin-left: 1rem;
+  }
+
+  .reset-icon {
+    width: 1rem;
+  }
+
+  .reset {
+    border: none;
+    width: 7rem;
+    font-weight: normal;
   }
 `;

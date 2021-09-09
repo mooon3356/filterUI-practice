@@ -5,24 +5,25 @@ type ModalType = Pick<ModalProps, "type">;
 
 const modalStyles = css<ModalType>`
   ${({ type }) =>
-    type === "filter-material" &&
-    css`
-      width: 13rem;
-      height: 16.4rem;
-      top: 27%;
-      left: 22.5%;
-      border-radius: 4px;
-    `}
-
-  ${({ type }) =>
     type === "filter-method" &&
     css`
       width: 13rem;
       height: 8rem;
       top: 27%;
-      left: 12.8%;
+      left: 17.8%;
       border-radius: 4px;
     `}
+
+  ${({ type }) =>
+    type === "filter-material" &&
+    css`
+      width: 13rem;
+      height: 16.4rem;
+      top: 27%;
+      left: 27.5%;
+      border-radius: 4px;
+    `}
+
 
     ${({ type }) =>
     type === "sidebar" &&

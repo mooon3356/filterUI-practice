@@ -11,8 +11,8 @@ function CheckBox({ el, checked, name, handleCheck }: CheckBoxProps) {
       <label>
         <input
           onChange={(e) => {
-            e.stopPropagation();
             handleCheck(e);
+            e.stopPropagation();
           }}
           className="check"
           type="checkbox"
@@ -28,8 +28,8 @@ function CheckBox({ el, checked, name, handleCheck }: CheckBoxProps) {
       <label>
         <input
           onChange={(e) => {
-            e.stopPropagation();
             handleCheck(e);
+            e.stopPropagation();
           }}
           className="check"
           type="checkbox"

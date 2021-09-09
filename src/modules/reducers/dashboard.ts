@@ -7,11 +7,13 @@ import {
 import { Data } from "../../types/reducer";
 
 export type DashboardState = {
-  data: Data[] | null | undefined;
+  data: null | Data[] | undefined;
+  checkedData: null | Data[] | undefined;
 };
 
 export const initialState = {
   data: null,
+  checkedData: null,
 };
 
 export type DashboardAction =
@@ -24,8 +26,12 @@ function dashboard(
 ) {
   switch (action.type) {
     case STOREDATA:
-      return { data: action.payload };
+      return { ...state, data: action.payload, checkedData: action.payload };
     case CHECKFILTER:
+      if (Object.keys(action.payload).length === 0) {
+        console.log('안에 아무것도 없음')
+        return {...state, checkedData: state.data};
+      }
       const filtered = state.data?.filter((el) => {
         const fullList = [...el.method, ...el.material];
         for (let key in action.payload) {
@@ -35,7 +41,7 @@ function dashboard(
         }
         return true;
       });
-      return { data: filtered };
+      return { ...state, checkedData: filtered };
     default:
       return state;
   }

@@ -13,25 +13,29 @@ function RequestCardList() {
     });
   }, []);
 
-  if (!data.data) {
-    return <div>없음</div>;
+  if (!data.checkedData) {
+    return <div>로딩 중입니다.</div>;
   } else {
     return (
       <Container>
-        {data.data.map((el) => (
-          <RequestCard
-            key={el.id}
-            id={el.id}
-            title={el.title}
-            client={el.client}
-            due={el.due}
-            count={el.count}
-            amount={el.amount}
-            method={el.method}
-            material={el.material}
-            status={el.status}
-          ></RequestCard>
-        ))}
+        {data.checkedData.length === 0 ? (
+          <div>없음</div>
+        ) : (
+          data.checkedData.map((el) => (
+            <RequestCard
+              key={el.id}
+              id={el.id}
+              title={el.title}
+              client={el.client}
+              due={el.due}
+              count={el.count}
+              amount={el.amount}
+              method={el.method}
+              material={el.material}
+              status={el.status}
+            ></RequestCard>
+          ))
+        )}
       </Container>
     );
   }
@@ -42,8 +46,8 @@ export default RequestCardList;
 const Container = styled.div`
   gap: 1.5rem 1.5rem;
   margin-top: 2rem;
-  width: 70%;
+  width: 60%;
   height: 85%;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
 `;

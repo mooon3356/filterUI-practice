@@ -3,7 +3,7 @@ import CheckBox from "../../components/CheckBox";
 import { CheckedListType } from "../Filters";
 
 const methodList = ["밀링", "선반"];
-const materialList = ["알루미늄", "탄소강", "구리", "합금강", "강철F"];
+const materialList = ["알루미늄", "탄소강", "구리", "합금강", "강철"];
 
 type CheckListProps = {
   type: string;
@@ -14,7 +14,7 @@ type CheckListProps = {
 function CheckList({ type, handleCheck, checkedList }: CheckListProps) {
   if (type === "method") {
     return (
-      <Wrapper onClick={handleCheck}>
+      <Wrapper>
         {methodList.map((el, idx) =>
           checkedList.method[el] ? (
             <CheckBox
