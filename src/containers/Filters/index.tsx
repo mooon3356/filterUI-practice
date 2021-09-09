@@ -1,8 +1,9 @@
 import CheckList from "../../containers/CheckList";
 import Modal from "../../components/Modal";
 import styled from "styled-components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Filter from "../../components/Filter";
+import useDashboard from "../../hooks/useDashboard";
 
 export type CheckedListType = {
   method: {
@@ -20,15 +21,19 @@ type FiltersContainerType = {
   setModalType: React.Dispatch<React.SetStateAction<string>>;
 };
 
-function FiltersContainer({isOpen, setIsOpen, modalType, setModalType,
+function FiltersContainer({
+  isOpen,
+  setIsOpen,
+  modalType,
+  setModalType,
 }: FiltersContainerType) {
-
+  const { onCheckFilter, onStoreData, data } = useDashboard();
   const [checkedList, setCheckedList] = useState<CheckedListType>({
     method: {},
     material: {},
   });
   const { method, material } = checkedList;
-  
+
   let methodCount = Object.keys(method).length;
   let materialCount = Object.keys(material).length;
 
@@ -58,6 +63,13 @@ function FiltersContainer({isOpen, setIsOpen, modalType, setModalType,
       setCheckedList({ ...checkedList, material: newMaterial });
     }
   };
+
+  useEffect(() => {
+    if (methodCount !== 0 || materialCount !== 0) {
+      onCheckFilter({ ...method, ...material });
+      console.log('filter 디스패치 실행')
+    }
+  }, [checkedList]);
 
   return (
     <Container>
