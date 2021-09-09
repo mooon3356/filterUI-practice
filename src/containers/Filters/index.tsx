@@ -1,8 +1,8 @@
-import Button from "../../components/Button";
 import CheckList from "../../containers/CheckList";
 import Modal from "../../components/Modal";
 import styled from "styled-components";
 import { useState } from "react";
+import Filter from "../../components/Filter";
 
 type FiltersContainerType = {
   isOpen: boolean;
@@ -50,24 +50,38 @@ function FiltersContainer({
 
   return (
     <Container>
-      <Button
-        className="filter-btn method"
+      <Filter
+        className="filter"
+        size="medium"
         handler={() => {
           setIsOpen(!isOpen);
           setModalType("method");
         }}
-      >
-        가공방식
-      </Button>
-      <Button
-        className="filter-btn material"
+        checkedList={checkedList.method}
+        component={
+          <span>
+            가공방식
+            {checkedList.method.length >= 2 &&
+              `(${checkedList.method.length - 1})`}
+          </span>
+        }
+      ></Filter>
+      <Filter
+        className="filter"
+        size="small"
         handler={() => {
           setIsOpen(!isOpen);
           setModalType("material");
         }}
-      >
-        재료
-      </Button>
+        checkedList={checkedList.material}
+        component={
+          <span>
+            재료
+            {checkedList.material.length >= 2 &&
+              `(${checkedList.material.length - 1})`}
+          </span>
+        }
+      ></Filter>
 
       {isOpen ? (
         modalType === "method" ? (
@@ -107,17 +121,7 @@ export default FiltersContainer;
 const Container = styled.div`
   width: 70%;
 
-  .filter-btn {
-    background: ${(props) => props.theme.gray.light};
-    color: ${(props) => props.theme.gray.default};
-    border: 1px solid ${(props) => props.theme.gray.sub};
-    border-radius: 4px;
-    width: 9.8rem;
-    height: 3.2rem;
-  }
-
-  .filter-btn.material {
-    margin-left: 1rem;
-    width: 7.6rem;
+  .filter {
+    margin-right: 1rem;
   }
 `;
