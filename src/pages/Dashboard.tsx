@@ -14,8 +14,9 @@ function DashboardPage() {
         setIsOpen={setIsOpen}
         modalType={modalType}
         setModalType={setModalType}
-        ></FiltersContainer>
-        <RequestCardList></RequestCardList>
+      ></FiltersContainer>
+
+      <RequestCardList></RequestCardList>
     </Container>
   );
 }

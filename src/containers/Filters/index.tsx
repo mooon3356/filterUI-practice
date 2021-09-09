@@ -1,11 +1,12 @@
 import CheckList from "../../containers/CheckList";
 import Modal from "../../components/Modal";
-import styled from "styled-components";
 import { useEffect, useState } from "react";
 import Filter from "../../components/Filter";
 import useDashboard from "../../hooks/useDashboard";
 import Button from "../../components/Button";
 import { reset } from "../../images";
+import Toggle from "../../components/Toggle";
+import { Container } from "./Filters.style";
 
 export type CheckedListType = {
   method: {
@@ -29,7 +30,8 @@ function FiltersContainer({
   modalType,
   setModalType,
 }: FiltersContainerType) {
-  const { onCheckFilter, onStoreData, data } = useDashboard();
+  const { onCheckFilter, onConsultingFilter } = useDashboard();
+  const [toggle, setToggle] = useState(false);
   const [checkedList, setCheckedList] = useState<CheckedListType>({
     method: {},
     material: {},
@@ -40,6 +42,8 @@ function FiltersContainer({
   let materialCount = Object.keys(material).length;
 
   const handleCheck = (e: any) => {
+    setToggle(false);
+
     const type = e.target.name;
     const value = e.target.value;
     let newMethod = { ...method };
@@ -67,50 +71,74 @@ function FiltersContainer({
   };
 
   const handleReset = () => {
-    setCheckedList({method: {}, material: {}})
+    setCheckedList({ method: {}, material: {} });
+
+    if (toggle) {
+      setToggle(false);
+    }
+  };
+
+  const handleToggle = () => {
+    setToggle(!toggle);
+    handleReset();
   };
 
   useEffect(() => {
     onCheckFilter({ ...method, ...material });
   }, [checkedList]);
 
+  useEffect(() => {
+    onConsultingFilter(toggle);
+  }, [toggle]);
+
   return (
     <Container>
-      <Filter
-        className="filter"
-        size="medium"
-        handler={() => {
-          setIsOpen(!isOpen);
-          setModalType("method");
-        }}
-        checkedList={checkedList.method}
-        component={
-          <span>
-            가공방식
-            {methodCount >= 1 && `(${methodCount})`}
-          </span>
-        }
-      ></Filter>
-      <Filter
-        className="filter"
-        size="small"
-        handler={() => {
-          setIsOpen(!isOpen);
-          setModalType("material");
-        }}
-        checkedList={checkedList.material}
-        component={
-          <span>
-            재료
-            {materialCount >= 1 && `(${materialCount})`}
-          </span>
-        }
-      ></Filter>
-      <div className="reset-box">
-        <img className="reset-icon" src={reset}></img>
-        <Button handler={handleReset} size="medium" className="reset" color={"white"}>
-          필터링 리셋
-        </Button>
+      <div className="check-filters">
+        <Filter
+          className="filter"
+          size="medium"
+          handler={() => {
+            setIsOpen(!isOpen);
+            setModalType("method");
+          }}
+          checkedList={checkedList.method}
+          component={
+            <span>
+              가공방식
+              {methodCount >= 1 && `(${methodCount})`}
+            </span>
+          }
+        ></Filter>
+        <Filter
+          className="filter"
+          size="small"
+          handler={() => {
+            setIsOpen(!isOpen);
+            setModalType("material");
+          }}
+          checkedList={checkedList.material}
+          component={
+            <span>
+              재료
+              {materialCount >= 1 && `(${materialCount})`}
+            </span>
+          }
+        ></Filter>
+        <div className="reset-box">
+          <img className="reset-icon" src={reset}></img>
+          <Button
+            handler={handleReset}
+            size="medium"
+            className="reset"
+            color={"white"}
+          >
+            필터링 리셋
+          </Button>
+        </div>
+      </div>
+      <div className="toggle-box">
+        <Toggle toggle={toggle} handleToggle={handleToggle}></Toggle>
+        <div className="toggle-title">상담 중인 요청만 보기</div>
       </div>
 
       {isOpen ? (
@@ -147,28 +175,3 @@ function FiltersContainer({
 }
 
 export default FiltersContainer;
-
-const Container = styled.div`
-  width: 60%;
-  position: relative;
-  display: flex;
-  align-items: center;
-
-  .filter {
-    margin-right: 1rem;
-  }
-
-  .reset-box {
-    margin-left: 1rem;
-  }
-
-  .reset-icon {
-    width: 1rem;
-  }
-
-  .reset {
-    border: none;
-    width: 7rem;
-    font-weight: normal;
-  }
-`;

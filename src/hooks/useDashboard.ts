@@ -1,6 +1,6 @@
 import { RootState } from "../modules/reducers";
 import { useSelector, useDispatch } from "react-redux";
-import { storeData, checkFilter } from "../modules/actions";
+import { storeData, checkFilter, consultingFilter } from "../modules/actions";
 import { Data } from "../types/reducer";
 
 function useDashboard() {
@@ -8,10 +8,11 @@ function useDashboard() {
   const dispatch = useDispatch();
 
   const onStoreData = (data: Data[]) => dispatch(storeData(data));
-  const onCheckFilter = (checkedList: {[key:string]: boolean}) =>
+  const onCheckFilter = (checkedList: { [key: string]: boolean }) =>
     dispatch(checkFilter(checkedList));
+  const onConsultingFilter = (toggle:boolean) => dispatch(consultingFilter(toggle));
 
-  return { data, onStoreData, onCheckFilter };
+  return { data, onStoreData, onCheckFilter, onConsultingFilter };
 }
 
 export default useDashboard;

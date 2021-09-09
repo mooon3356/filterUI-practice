@@ -13,15 +13,15 @@ function RequestCardList() {
     });
   }, []);
 
-  if (!data.checkedData) {
+  if (!data.currentData) {
     return <div>로딩 중입니다.</div>;
   } else {
     return (
       <Container>
-        {data.checkedData.length === 0 ? (
+        {data.currentData.length === 0 ? (
           <div>없음</div>
         ) : (
-          data.checkedData.map((el) => (
+          data.currentData.map((el) => (
             <RequestCard
               key={el.id}
               id={el.id}
