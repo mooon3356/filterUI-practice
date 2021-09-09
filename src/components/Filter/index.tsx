@@ -3,7 +3,7 @@ import { Wrapper } from "./Filter.style";
 
 export type FilterProps = {
   handler?: () => void;
-  checkedList: string[];
+  checkedList: { [key: string]: boolean };
   component?: Component | ReactElement;
   size: "small" | "medium";
   className?: string;
@@ -16,8 +16,7 @@ function Filter({
   component,
   className,
 }: FilterProps) {
-  const count = checkedList.length;
-  console.log(count + "hi");
+  const count = Object.keys(checkedList).length;
   return (
     <Wrapper
       className={className}

@@ -4,6 +4,15 @@ import styled from "styled-components";
 import { useState } from "react";
 import Filter from "../../components/Filter";
 
+export type CheckedListType = {
+  method: {
+    [key: string]: boolean;
+  };
+  material: {
+    [key: string]: boolean;
+  };
+};
+
 type FiltersContainerType = {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -11,42 +20,44 @@ type FiltersContainerType = {
   setModalType: React.Dispatch<React.SetStateAction<string>>;
 };
 
-function FiltersContainer({
-  isOpen,
-  setIsOpen,
-  modalType,
-  setModalType,
+function FiltersContainer({isOpen, setIsOpen, modalType, setModalType,
 }: FiltersContainerType) {
-  const [checkedList, setCheckedList] = useState({
-    method: [""],
-    material: [""],
+
+  const [checkedList, setCheckedList] = useState<CheckedListType>({
+    method: {},
+    material: {},
   });
   const { method, material } = checkedList;
+  
+  let methodCount = Object.keys(method).length;
+  let materialCount = Object.keys(material).length;
 
   const handleCheck = (e: any) => {
     const type = e.target.name;
     const value = e.target.value;
+    let newMethod = { ...method };
+    let newMaterial = { ...material };
 
-    if (method.includes(value)) {
-      const filtered = method.filter((el) => el !== value);
-      setCheckedList({ ...checkedList, method: filtered });
+    if (method[value]) {
+      delete newMethod[value];
+      setCheckedList({ ...checkedList, method: newMethod });
       return;
     }
 
-    if (material.includes(value)) {
-      const filtered = material.filter((el) => el !== value);
-      setCheckedList({ ...checkedList, material: filtered });
+    if (material[value]) {
+      delete newMaterial[value];
+      setCheckedList({ ...checkedList, material: newMaterial });
       return;
     }
 
     if (type === "method") {
-      setCheckedList({ ...checkedList, method: [...method, value] });
+      newMethod[value] = true;
+      setCheckedList({ ...checkedList, method: newMethod });
     } else if (type === "material") {
-      setCheckedList({ ...checkedList, material: [...material, value] });
+      newMaterial[value] = true;
+      setCheckedList({ ...checkedList, material: newMaterial });
     }
   };
-
-  console.log(method);
 
   return (
     <Container>
@@ -61,8 +72,7 @@ function FiltersContainer({
         component={
           <span>
             가공방식
-            {checkedList.method.length >= 2 &&
-              `(${checkedList.method.length - 1})`}
+            {methodCount >= 1 && `(${methodCount})`}
           </span>
         }
       ></Filter>
@@ -77,8 +87,7 @@ function FiltersContainer({
         component={
           <span>
             재료
-            {checkedList.material.length >= 2 &&
-              `(${checkedList.material.length - 1})`}
+            {materialCount >= 1 && `(${materialCount})`}
           </span>
         }
       ></Filter>

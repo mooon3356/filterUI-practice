@@ -6,7 +6,7 @@ type CheckedType = Pick<FilterProps, "checkedList">;
 
 const checkedStypes = css<CheckedType>`
   ${(props) =>
-    props.checkedList.length >= 2 &&
+    Object.keys(props.checkedList).length >= 1 &&
     css`
       background: ${props.theme.primary[700]};
       color: ${props.theme.gray.light};

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import CheckBox from "../../components/CheckBox";
+import { CheckedListType } from "../Filters";
 
 const methodList = ["밀링", "선반"];
 const materialList = ["알루미늄", "탄소강", "구리", "합금강", "강철F"];
@@ -7,10 +8,7 @@ const materialList = ["알루미늄", "탄소강", "구리", "합금강", "강�
 type CheckListProps = {
   type: string;
   handleCheck: (e: any) => void;
-  checkedList: {
-    method: string[];
-    material: string[];
-  };
+  checkedList: CheckedListType;
 };
 
 function CheckList({ type, handleCheck, checkedList }: CheckListProps) {
@@ -18,7 +16,7 @@ function CheckList({ type, handleCheck, checkedList }: CheckListProps) {
     return (
       <Wrapper onClick={handleCheck}>
         {methodList.map((el, idx) =>
-          checkedList.method.includes(el) ? (
+          checkedList.method[el] ? (
             <CheckBox
               handleCheck={handleCheck}
               key={idx + 1}
@@ -42,7 +40,7 @@ function CheckList({ type, handleCheck, checkedList }: CheckListProps) {
     return (
       <Wrapper>
         {materialList.map((el, idx) =>
-          checkedList.material.includes(el) ? (
+          checkedList.material[el] ? (
             <CheckBox
               handleCheck={handleCheck}
               key={idx + 1}
