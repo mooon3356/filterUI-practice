@@ -9,7 +9,7 @@ function CheckList({ type }: CheckListProps) {
     return (
       <Wrapper>
         <label>
-          <input className="check" type="checkbox" value="밀링" />
+          <input className="check" type="checkbox" value="밀링"/>
           밀링
         </label>
         <label>

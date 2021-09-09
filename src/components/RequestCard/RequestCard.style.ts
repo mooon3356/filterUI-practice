@@ -3,8 +3,6 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
   font-size: 1.4rem;
   line-height: 2.2rem;
-  width: 33rem;
-  height: 27rem;
 
   position: relative;
   border-radius: 4px;

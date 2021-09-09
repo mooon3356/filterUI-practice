@@ -9,8 +9,8 @@ const modalStyles = css<ModalType>`
     css`
       width: 13rem;
       height: 16.4rem;
-      top: 15rem;
-      left: 27.1rem;
+      top: 27%;
+      left: 22.5%;
       border-radius: 4px;
     `}
 
@@ -19,8 +19,8 @@ const modalStyles = css<ModalType>`
     css`
       width: 13rem;
       height: 8rem;
-      top: 15rem;
-      left: 13.1rem;
+      top: 27%;
+      left: 12.8%;
       border-radius: 4px;
     `}
 
@@ -45,7 +45,6 @@ export const Wrapper = styled.div<ModalProps>`
 
 
   .modal-overlay {
-    position: absolute;
     width: 100%;
     height: 100%;
     cursor: pointer;

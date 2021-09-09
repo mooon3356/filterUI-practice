@@ -40,9 +40,10 @@ function RequestCardList() {
 export default RequestCardList;
 
 const Container = styled.div`
-  gap: 2rem;
+  gap: 1.5rem 1.5rem;
   margin-top: 2rem;
   width: 70%;
+  height: 85%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 `;
