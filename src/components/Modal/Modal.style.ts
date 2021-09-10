@@ -13,11 +13,6 @@ const modalStyles = css<ModalType>`
       top: 3.7rem;
       left: -3rem;
       border-radius: 4px;
-
-      @media ${({ theme }) => theme.device.mobile} {
-        top: 6rem;
-        left: -3.1rem;
-      }
     `}
 
   ${({ type }) =>
@@ -28,11 +23,6 @@ const modalStyles = css<ModalType>`
       top: 3.7rem;
       left: 10.7rem;
       border-radius: 4px;
-
-      @media ${({ theme }) => theme.device.mobile} {
-        top: 6rem;
-        left: 10.8rem;
-      }
     `}
 
     ${({ type }) =>

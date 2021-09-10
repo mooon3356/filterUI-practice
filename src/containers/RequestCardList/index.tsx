@@ -1,27 +1,19 @@
-import { useEffect } from "react";
 import styled from "styled-components";
 import useDashboard from "../../hooks/useDashboard";
-import axios from "axios";
 import RequestCard from "../../components/RequestCard";
 import EmptyBox from "../../components/EmptyBox";
 
 function RequestCardList() {
-  const { data, onStoreData } = useDashboard();
-
-  useEffect(() => {
-    axios.get("http://localhost:4000/requests").then((data) => {
-      onStoreData(data.data);
-    });
-  }, []);
+  const { data } = useDashboard();
 
   if (!data.currentData) {
-    return <div>로딩 중입니다.</div>;
+    return <></>;
   } else {
     return (
       <>
         {data.currentData.length === 0 ? (
           <Container empty={true}>
-            <EmptyBox />
+            <EmptyBox/>
           </Container>
         ) : (
           <Container empty={false}>

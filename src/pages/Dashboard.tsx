@@ -1,25 +1,40 @@
 import styled from "styled-components";
 import RequestCardList from "../containers/RequestCardList";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FiltersContainer from "../containers/Filters";
 import PageIntro from "../components/PageIntro";
+import useDashboard from "../hooks/useDashboard";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
 function DashboardPage() {
   const [isOpen, setIsOpen] = useState(false);
   const [modalType, setModalType] = useState("");
+  const { data, onStoreData } = useDashboard();
+
+  useEffect(() => {
+    axios.get("http://localhost:4000/requests").then((data) => {
+      onStoreData(data.data);
+    });
+  }, []);
 
   return (
     <Layout>
-      <Container>
-        <PageIntro />
-        <FiltersContainer
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-          modalType={modalType}
-          setModalType={setModalType}
-        ></FiltersContainer>
-        <RequestCardList></RequestCardList>
-      </Container>
+      {!data.currentData ? (
+        <FontAwesomeIcon className="spin-icon" icon={faSpinner} spin />
+      ) : (
+        <Container>
+          <PageIntro />
+          <FiltersContainer
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            modalType={modalType}
+            setModalType={setModalType}
+          ></FiltersContainer>
+          <RequestCardList></RequestCardList>
+        </Container>
+      )}
     </Layout>
   );
 }
@@ -32,6 +47,12 @@ const Layout = styled.div`
   display: flex;
   justify-content: center;
   position: relative;
+
+  .spin-icon {
+    position: absolute;
+    top: 45%;
+    font-size: 5rem;
+  }
 `;
 
 const Container = styled.div`
@@ -47,6 +68,7 @@ const Container = styled.div`
 
   @media ${({ theme }) => theme.device.mobile} {
     width: 80%;
-    top: 20%;
+    top: 5%;
+    display: block;
   }
 `;

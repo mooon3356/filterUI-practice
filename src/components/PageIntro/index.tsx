@@ -20,4 +20,8 @@ const Wrapper = styled.div`
   .description {
     font-size: 1.5rem;
   }
+
+  @media ${({ theme }) => theme.device.mobile} {
+    height: 13%;
+  }
 `;

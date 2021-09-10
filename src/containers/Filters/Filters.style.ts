@@ -49,7 +49,7 @@ export const Container = styled.div`
 
     .check-filters {
       width: 100%;
-      margin: 2rem 0;
+      margin-bottom: 2rem;
     }
 
     .toggle-box {
