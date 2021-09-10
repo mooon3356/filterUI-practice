@@ -9,8 +9,8 @@ const modalStyles = css<ModalType>`
     css`
       width: 13rem;
       height: 8rem;
-      top: 3.5rem;
-      left: -0.3rem;
+      top: 3.7rem;
+      left: -3rem;
       border-radius: 4px;
     `}
 
@@ -19,8 +19,8 @@ const modalStyles = css<ModalType>`
     css`
       width: 13rem;
       height: 16.4rem;
-      top: 3.5rem;
-      left: 10.5rem;
+      top: 3.7rem;
+      left: 10.7rem;
       border-radius: 4px;
     `}
 
@@ -43,7 +43,6 @@ export const Wrapper = styled.div<ModalProps>`
   top: 0;
   left: 0;
   z-index: 2;
-  border: 2px solid blue;
   position ${(props) =>
     props.type == "filter-material" || props.type === "filter-method"
       ? "absolute"

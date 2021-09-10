@@ -2,6 +2,7 @@ import styled from "styled-components";
 import RequestCardList from "../containers/RequestCardList";
 import { useState } from "react";
 import FiltersContainer from "../containers/Filters";
+import PageIntro from "../components/PageIntro";
 
 function DashboardPage() {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,6 +11,7 @@ function DashboardPage() {
   return (
     <Layout>
       <Container>
+        <PageIntro />
         <FiltersContainer
           isOpen={isOpen}
           setIsOpen={setIsOpen}
@@ -38,7 +40,5 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 15rem;
-  border: 2px solid red;
-  position: relative;
+  padding-top: 8rem;
 `;
