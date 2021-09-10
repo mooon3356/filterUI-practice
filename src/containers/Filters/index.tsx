@@ -31,6 +31,7 @@ function FiltersContainer({
   setModalType,
 }: FiltersContainerType) {
   const { onCheckFilter, onConsultingFilter } = useDashboard();
+  const [functionType, setFunctionType] = useState("");
   const [toggle, setToggle] = useState(false);
   const [checkedList, setCheckedList] = useState<CheckedListType>({
     method: {},
@@ -42,8 +43,7 @@ function FiltersContainer({
   let materialCount = Object.keys(material).length;
 
   const handleCheck = (e: any) => {
-    setToggle(false);
-
+    setFunctionType("check");
     const type = e.target.name;
     const value = e.target.value;
     let newMethod = { ...method };
@@ -54,13 +54,11 @@ function FiltersContainer({
       setCheckedList({ ...checkedList, method: newMethod });
       return;
     }
-
     if (material[value]) {
       delete newMaterial[value];
       setCheckedList({ ...checkedList, material: newMaterial });
       return;
     }
-
     if (type === "method") {
       newMethod[value] = true;
       setCheckedList({ ...checkedList, method: newMethod });
@@ -71,24 +69,32 @@ function FiltersContainer({
   };
 
   const handleReset = () => {
+    setFunctionType("reset");
     setCheckedList({ method: {}, material: {} });
-
-    if (toggle) {
-      setToggle(false);
-    }
+    if (isOpen) setIsOpen(false);
+    if (toggle) setToggle(false);
   };
 
   const handleToggle = () => {
+    setFunctionType("toggle");
     setToggle(!toggle);
-    handleReset();
+    if (isOpen) setIsOpen(false);
   };
 
   useEffect(() => {
+    if (functionType === "toggle") return;
+    if (toggle) setToggle(false);
     onCheckFilter({ ...method, ...material });
   }, [checkedList]);
 
   useEffect(() => {
-    onConsultingFilter(toggle);
+    if (functionType === "check") return;
+    if (methodCount === 0 && materialCount === 0) {
+      onConsultingFilter(toggle);
+    } else {
+      setCheckedList({ method: {}, material: {} });
+      onConsultingFilter(toggle);
+    }
   }, [toggle]);
 
   return (
@@ -175,3 +181,10 @@ function FiltersContainer({
 }
 
 export default FiltersContainer;
+
+// useEffect(() => {
+//   toggle
+//     ? onConsultingFilter(toggle)
+//     : setCheckedList({ method: {}, material: {} });
+//   if (isOpen) setIsOpen(false);
+// }, [toggle]);

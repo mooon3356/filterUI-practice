@@ -44,10 +44,12 @@ function RequestCardList() {
 export default RequestCardList;
 
 const Container = styled.div`
-  gap: 1.5rem 1.5rem;
+  gap: 2rem 2rem;
   margin-top: 2rem;
-  width: 60%;
-  height: 85%;
+  width: 100%;
+  height: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  border: 1px solid black;
+  justify-content: center;
 `;

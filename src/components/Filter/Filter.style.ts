@@ -35,6 +35,8 @@ export const Wrapper = styled.button<FilterProps>`
   color: ${(props) => props.theme.gray.default};
   border: 1px solid ${(props) => props.theme.gray.sub};
   border-radius: 4px;
+  cursor: pointer;
+  z-index: 99;
 
   ${sizeStyles};
   ${checkedStypes};

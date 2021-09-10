@@ -9,8 +9,8 @@ const modalStyles = css<ModalType>`
     css`
       width: 13rem;
       height: 8rem;
-      top: 27%;
-      left: 17.8%;
+      top: 3.5rem;
+      left: -0.3rem;
       border-radius: 4px;
     `}
 
@@ -19,8 +19,8 @@ const modalStyles = css<ModalType>`
     css`
       width: 13rem;
       height: 16.4rem;
-      top: 27%;
-      left: 27.5%;
+      top: 3.5rem;
+      left: 10.5rem;
       border-radius: 4px;
     `}
 
@@ -39,16 +39,19 @@ export const Wrapper = styled.div<ModalProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   z-index: 2;
-
+  border: 2px solid blue;
+  position ${(props) =>
+    props.type == "filter-material" || props.type === "filter-method"
+      ? "absolute"
+      : "fixed"};
 
   .modal-overlay {
     width: 100%;
-    height: 100%;
-    cursor: pointer;
+    height: 100vh;
     background: ${(props) =>
       props.type === "filter-material" || "filter-method"
         ? null

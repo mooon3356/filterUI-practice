@@ -1,3 +1,5 @@
+import styled from "styled-components"
+
 type CheckBoxProps = {
   el: string;
   checked: boolean;
@@ -8,38 +10,50 @@ type CheckBoxProps = {
 function CheckBox({ el, checked, name, handleCheck }: CheckBoxProps) {
   if (checked) {
     return (
-      <label>
-        <input
-          onChange={(e) => {
-            handleCheck(e);
-            e.stopPropagation();
-          }}
-          className="check"
-          type="checkbox"
-          name={name}
-          value={el}
-          defaultChecked
-        />
-        {el}
-      </label>
+      <Wrapper>
+        <label>
+          <input
+            onChange={(e) => {
+              handleCheck(e);
+              e.stopPropagation();
+            }}
+            className="check"
+            type="checkbox"
+            name={name}
+            value={el}
+            defaultChecked
+          />
+          {el}
+        </label>
+      </Wrapper>
     );
   } else {
     return (
-      <label>
-        <input
-          onChange={(e) => {
-            handleCheck(e);
-            e.stopPropagation();
-          }}
-          className="check"
-          type="checkbox"
-          name={name}
-          value={el}
-        />
-        {el}
-      </label>
+      <Wrapper>
+        <label>
+          <input
+            onChange={(e) => {
+              handleCheck(e);
+              e.stopPropagation();
+            }}
+            className="check"
+            type="checkbox"
+            name={name}
+            value={el}
+          />
+          {el}
+        </label>
+      </Wrapper>
     );
   }
 }
 
 export default CheckBox;
+
+const Wrapper = styled.div`
+
+  .check {
+    margin-right: 1rem;
+  }
+
+`

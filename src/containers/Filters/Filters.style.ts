@@ -1,17 +1,19 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 60%;
-  position: relative;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border: 1px solid green;
+  position: relative;
 
   .filter {
     margin-right: 1rem;
   }
 
   .reset-box {
+    z-index: 99;
     margin-left: 1rem;
   }
 

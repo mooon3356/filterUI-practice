@@ -4,10 +4,11 @@ import { ToggleProps } from "./index";
 export const Wrapper = styled.div<ToggleProps>`
   position: relative;
   display: flex;
-  width: 3.5rem;
+  width: 3.1rem;
   height: 2rem;
   align-items: center;
   cursor: pointer;
+  z-index: 99;
 
   .circle {
     position: absolute;

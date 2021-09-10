@@ -71,8 +71,4 @@ const Wrapper = styled.div`
   font-size: 1.5rem;
   font-weight: 500;
   line-height: 2.5rem;
-
-  .check {
-    margin: 0 0.8rem 0.5rem 0;
-  }
 `;

@@ -48,6 +48,7 @@ function dashboard(
 
     case CONSULTINGFILTER:
       if (action.payload) {
+        console.log(action.payload)
         const statusFiltered = state.data?.filter((el) => {
           return el.status === "상담중";
         });
