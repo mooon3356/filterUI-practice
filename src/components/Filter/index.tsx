@@ -1,4 +1,5 @@
 import { Component, ReactElement } from "react";
+import { arrow } from "../../images";
 import { Wrapper } from "./Filter.style";
 
 export type FilterProps = {
@@ -25,6 +26,7 @@ function Filter({
       onClick={handler}
     >
       {component}
+      <img className="arrow-icon" src={arrow}></img>
     </Wrapper>
   );
 }

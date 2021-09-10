@@ -1,14 +1,14 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
+  position: relative;
   font-size: 1.4rem;
-  line-height: 2.2rem;
+  line-height: 2.3rem;
   width: 100%;
   height: 100%;
-
-  position: relative;
+  padding: 1.3rem 1.5rem;
   border-radius: 4px;
-  padding: 1rem 1.5rem;
+
   background: ${(props) => props.theme.gray.light};
   border: 1px solid ${(props) => props.theme.border.gray};
   color: ${(props) => props.theme.gray.default};
@@ -73,6 +73,7 @@ export const Wrapper = styled.div`
 
   .card-info {
     color: ${(props) => props.theme.gray.default};
+    line-height: 2.4rem;
   }
 
   .card-info.value {
@@ -80,6 +81,15 @@ export const Wrapper = styled.div`
   }
 
   .btn {
+    margin-top: 1rem;
     margin-right: 1rem;
+  }
+
+  @media ${({ theme }) => theme.device.mobile} {
+    line-height: 3rem;
+
+    .card-info {
+      line-height: 3rem;
+    }
   }
 `;

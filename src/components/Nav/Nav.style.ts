@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0%;
   width: 100%;
   height: 5rem;
@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  z-index: 99;
+  z-index: 999;
 
   .right-box {
     display: flex;
@@ -20,6 +20,11 @@ export const Wrapper = styled.div`
 
   .right-box > span {
     margin-right: 3rem;
+  }
+
+  .side-bar {
+    display: none;
+    font-size: 1rem;
   }
 
   .logo {
@@ -34,7 +39,6 @@ export const Wrapper = styled.div`
   }
 
   .client {
-    font-style: normal;
     font-weight: 500;
     font-size: 1.3rem;
     line-height: 2rem;
@@ -47,10 +51,38 @@ export const Wrapper = styled.div`
   }
 
   .logout {
-    font-style: normal;
-    font-weight: normal;
     font-size: 1.3rem;
     line-height: 20px;
     color: #ffffff;
+    cursor: pointer;
+  }
+
+  @media ${({ theme }) => theme.device.mobile} {
+    display: flex;
+    border: 1px solid black;
+    height: 3.5rem;
+
+    .side-bar {
+      display: inline-block;
+      color: white;
+      position: absolute;
+      top: 30%;
+      left: 5%;
+      z-index: 99;
+    }
+
+    .logo {
+      width: 12.5rem;
+      position: absolute;
+      top: 30%;
+      left: 7%;
+    }
+
+    .divider,
+    .vertor,
+    .client,
+    .logout {
+      display: none;
+    }
   }
 `;

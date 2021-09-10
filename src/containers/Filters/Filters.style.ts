@@ -39,4 +39,21 @@ export const Container = styled.div`
     padding-left: 1rem;
     font-size: 1.3rem;
   }
+
+  @media ${({ theme }) => theme.device.mobile} {
+    flex-direction: column;
+
+    .reset-box {
+      display: none;
+    }
+
+    .check-filters {
+      width: 100%;
+      margin: 2rem 0;
+    }
+
+    .toggle-box {
+      width: 100%;
+    }
+  }
 `;

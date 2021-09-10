@@ -49,11 +49,17 @@ function RequestCardList() {
 export default RequestCardList;
 
 const Container = styled.div<{ empty: boolean }>`
-  gap: 2rem 2rem;
+  gap: 1.5rem 1.5rem;
   margin-top: 2rem;
   width: 100%;
   height: 100%;
   display: ${(props) => (props.empty ? "block" : "grid")};
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
   justify-content: center;
+  margin-bottom: 1rem;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    grid-template-columns: 1fr;
+  }
 `;

@@ -10,7 +10,7 @@ const checkedStypes = css<CheckedType>`
     css`
       background: ${props.theme.primary[700]};
       color: ${props.theme.gray.light};
-      border: 1px solid ${props.theme.primary[700]}
+      border: 1px solid ${props.theme.primary[700]};
     `}
 `;
 
@@ -40,4 +40,9 @@ export const Wrapper = styled.button<FilterProps>`
 
   ${sizeStyles};
   ${checkedStypes};
+
+  .arrow-icon {
+    width: 1rem;
+    margin-left: 1rem;
+  }
 `;

@@ -44,7 +44,7 @@ export const Wrapper = styled.button<ButtonProps>`
   font-size: 1.2rem;
   cursor: pointer;
   font-weight: 500;
-  z-index: 99;
+  z-index: 9999;
 
   ${sizeStyles};
   ${colorStyles};

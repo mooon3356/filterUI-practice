@@ -21,5 +21,12 @@ declare module "styled-components" {
     border: {
       gray: string;
     };
+
+    device: {
+      mobile: string;
+      tablet: string;
+      laptop: string;
+    }
+  
   }
 }

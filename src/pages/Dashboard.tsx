@@ -34,11 +34,18 @@ const Layout = styled.div`
 `;
 
 const Container = styled.div`
+  position: absolute;
+  top: 6%;
   width: 70%;
-  height: 100%;
+  height: 94%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 8rem;
+  padding-top: 2rem;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 80%;
+    top: 20%;
+  }
 `;
