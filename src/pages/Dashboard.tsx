@@ -20,7 +20,7 @@ function DashboardPage() {
   }, []);
 
   return (
-    <Layout>
+    <Layout onClick={() => (isOpen ? setIsOpen(false) : null)}>
       {!data.currentData ? (
         <FontAwesomeIcon className="spin-icon" icon={faSpinner} spin />
       ) : (
@@ -47,6 +47,7 @@ const Layout = styled.div`
   display: flex;
   justify-content: center;
   position: relative;
+  z-index: 9;
 
   .spin-icon {
     position: absolute;

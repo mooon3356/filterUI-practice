@@ -46,24 +46,21 @@ export const Wrapper = styled.div<ModalProps>`
   justify-content: center;
   align-items: center;
   z-index: 9;
-
-  .modal-overlay {
-    width: 100vw;
-    height: 100vh;
-    position: ${(props) => (props.type === "sidebar" ? "fixed" : "absolute")};
-    background: ${(props) =>
-      props.type === "sidebar" ? "rgba(0, 0, 0, 0.5)" : null};
-    backdrop-filter: ${(props) =>
-      props.type === "sidebar" ? "blur(3px)" : null};
-  }
+  position: ${(props) => (props.type === "sidebar" ? "fixed" : "absolute")};
+  background: ${(props) =>
+    props.type === "sidebar" ? "rgba(0, 0, 0, 0.6)" : null};
+  backdrop-filter: ${(props) =>
+    props.type === "sidebar" ? "blur(3px)" : null};
 `;
 
 export const ModalBox = styled.div<ModalType>`
   ${modalStyles};
+  z-index: 999;
 
   position: absolute;
   padding: ${(props) =>
     props.type === "sidebar" ? null : "1.5rem 0 0 1.5rem;"};
   background-color: ${(props) => props.theme.gray.light};
-  border: 1px solid ${(props) => props.theme.border.gray};
+  border: 1px solid
+    ${(props) => (props.type !== "sidebar" ? props.theme.border.gray : null)};
 `;
