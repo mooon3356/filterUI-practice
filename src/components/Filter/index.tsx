@@ -1,6 +1,7 @@
 import { Component, ReactElement } from "react";
-import { arrow } from "../../images";
 import { Wrapper } from "./Filter.style";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSortDown } from "@fortawesome/free-solid-svg-icons";
 
 export type FilterProps = {
   handler?: () => void;
@@ -17,7 +18,6 @@ function Filter({
   component,
   className,
 }: FilterProps) {
-  const count = Object.keys(checkedList).length;
   return (
     <Wrapper
       className={className}
@@ -26,7 +26,7 @@ function Filter({
       onClick={handler}
     >
       {component}
-      <img className="arrow-icon" src={arrow}></img>
+      <FontAwesomeIcon className="arrow-icon" icon={faSortDown} />
     </Wrapper>
   );
 }

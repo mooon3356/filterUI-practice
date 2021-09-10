@@ -181,10 +181,3 @@ function FiltersContainer({
 }
 
 export default FiltersContainer;
-
-// useEffect(() => {
-//   toggle
-//     ? onConsultingFilter(toggle)
-//     : setCheckedList({ method: {}, material: {} });
-//   if (isOpen) setIsOpen(false);
-// }, [toggle]);

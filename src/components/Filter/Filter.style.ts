@@ -32,11 +32,14 @@ const sizeStyles = css<SizeType>`
 
 export const Wrapper = styled.button<FilterProps>`
   background: ${(props) => props.theme.gray.light};
-  color: ${(props) => props.theme.gray.default};
   border: 1px solid ${(props) => props.theme.gray.sub};
   border-radius: 4px;
   cursor: pointer;
   z-index: 99;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
 
   ${sizeStyles};
   ${checkedStypes};

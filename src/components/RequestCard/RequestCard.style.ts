@@ -2,20 +2,18 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   position: relative;
-  font-size: 1.4rem;
-  line-height: 2.3rem;
   width: 100%;
   height: 100%;
-  padding: 1.3rem 1.5rem;
-  border-radius: 4px;
-
-  background: ${(props) => props.theme.gray.light};
-  border: 1px solid ${(props) => props.theme.border.gray};
-  color: ${(props) => props.theme.gray.default};
-
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+
+  font-size: 1.4rem;
+  line-height: 2.3rem;
+  padding: 1.3rem 1.5rem;
+  border-radius: 4px;
+  background: ${(props) => props.theme.gray.light};
+  border: 1px solid ${(props) => props.theme.border.gray};
 
   &:hover {
     border: 1px solid ${(props) => props.theme.primary[500]};
@@ -72,7 +70,6 @@ export const Wrapper = styled.div`
   }
 
   .card-info {
-    color: ${(props) => props.theme.gray.default};
     line-height: 2.4rem;
   }
 

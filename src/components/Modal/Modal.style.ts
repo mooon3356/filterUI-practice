@@ -1,4 +1,4 @@
-import styled, { css, keyframes } from "styled-components";
+import styled, { css } from "styled-components";
 import { slideLeft } from "../../styles/animation";
 import { ModalProps } from "./index";
 
@@ -47,20 +47,25 @@ const modalStyles = css<ModalType>`
 `;
 
 export const Wrapper = styled.div<ModalProps>`
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: absolute;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 9;
-  position: ${(props) => (props.type === "sidebar" ? "fixed" : "absolute")};
-  background: ${(props) =>
-    props.type === "sidebar" ? "rgba(0, 0, 0, 0.6)" : null};
-  backdrop-filter: ${(props) =>
-    props.type === "sidebar" ? "blur(3px)" : null};
+
+  .modal-overlay {
+    width: 100vw;
+    height: 100vh;
+    position: ${(props) => (props.type === "sidebar" ? "fixed" : "absolute")};
+    background: ${(props) =>
+      props.type === "sidebar" ? "rgba(0, 0, 0, 0.5)" : null};
+    backdrop-filter: ${(props) =>
+      props.type === "sidebar" ? "blur(3px)" : null};
+  }
 `;
 
 export const ModalBox = styled.div<ModalType>`

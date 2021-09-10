@@ -31,6 +31,7 @@ const Layout = styled.div`
   height: 100vh;
   display: flex;
   justify-content: center;
+  position: relative;
 `;
 
 const Container = styled.div`

@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-width: 100%;
-height: 100vh;
-display: flex;
-flex-direction: column;
-position: absolute;
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 
   .logo-box {
     height: 3rem;
@@ -41,7 +41,6 @@ position: absolute;
   .side-text {
     font-size: 1.4rem;
     line-height: 20px;
-    color: ${(props) => props.theme.gray.default};
     cursor: pointer;
     font-weight: 500;
   }

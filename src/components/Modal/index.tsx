@@ -8,12 +8,7 @@ export type ModalProps = {
   type?: string;
 };
 
-function Modal({
-  isOpen = false,
-  component,
-  handleModal,
-  type
-}: ModalProps) {
+function Modal({ isOpen = false, component, handleModal, type }: ModalProps) {
   if (!isOpen) return null;
   return (
     <Wrapper isOpen={isOpen} type={type} onClick={handleModal}>

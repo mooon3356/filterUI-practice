@@ -29,4 +29,8 @@ export const Wrapper = styled.div<ToggleProps>`
     background: ${(props) =>
       !props.toggle ? props.theme.gray.dark : props.theme.primary[700]};
   }
+
+  @media ${({ theme }) => theme.device.mobile} {
+    z-index: 9;
+  }
 `;

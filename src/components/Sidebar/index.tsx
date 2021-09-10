@@ -3,7 +3,7 @@ import { Wrapper } from "./Sidebar.style";
 
 function Sidebar() {
   return (
-    <Wrapper className="side">
+    <Wrapper>
       <div className="logo-box">
         <img className="side-logo" src={logo2}></img>
       </div>

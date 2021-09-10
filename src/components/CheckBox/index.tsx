@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 type CheckBoxProps = {
   el: string;
@@ -15,7 +15,6 @@ function CheckBox({ el, checked, name, handleCheck }: CheckBoxProps) {
           <input
             onChange={(e) => {
               handleCheck(e);
-              e.stopPropagation();
             }}
             className="check"
             type="checkbox"
@@ -34,7 +33,6 @@ function CheckBox({ el, checked, name, handleCheck }: CheckBoxProps) {
           <input
             onChange={(e) => {
               handleCheck(e);
-              e.stopPropagation();
             }}
             className="check"
             type="checkbox"
@@ -51,9 +49,8 @@ function CheckBox({ el, checked, name, handleCheck }: CheckBoxProps) {
 export default CheckBox;
 
 const Wrapper = styled.div`
-
   .check {
     margin-right: 1rem;
+    cursor: pointer;
   }
-
-`
+`;

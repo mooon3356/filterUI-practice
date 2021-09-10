@@ -5,11 +5,11 @@ export const Wrapper = styled.div`
   top: 0%;
   width: 100%;
   height: 5rem;
-  background: ${(props) => props.theme.primary[700]};
-  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.24);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background: ${(props) => props.theme.primary[700]};
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.24);
   z-index: 999;
 
   .right-box {
@@ -22,9 +22,8 @@ export const Wrapper = styled.div`
     margin-right: 3rem;
   }
 
-  .side-bar {
+  .menu-icon {
     display: none;
-    font-size: 1rem;
   }
 
   .logo {
@@ -59,23 +58,23 @@ export const Wrapper = styled.div`
 
   @media ${({ theme }) => theme.device.mobile} {
     display: flex;
-    border: 1px solid black;
     height: 3.5rem;
 
-    .side-bar {
+    .menu-icon {
       display: inline-block;
-      color: white;
       position: absolute;
+      color: white;
+      width: 1rem;
       top: 30%;
       left: 5%;
-      z-index: 99;
+      z-index: 1;
     }
 
     .logo {
       width: 12.5rem;
       position: absolute;
       top: 30%;
-      left: 7%;
+      left: 4%;
     }
 
     .divider,

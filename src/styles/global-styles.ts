@@ -3,15 +3,16 @@ import { normalize } from "styled-normalize";
 
 const GlobalStyle = createGlobalStyle`
     ${normalize}
-    
+
     html {
         font-size: 10px; 
+        color: ${props => props.theme.gray.default};
     }
-    
+
     body {
       margin: 0;
     }
-      
+    
     code {
       font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
         monospace;
