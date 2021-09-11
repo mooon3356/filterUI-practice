@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import CheckBox from "../../components/CheckBox";
-import { CheckListProps } from "../../types/containers";
+import { CheckBoxContainerProps } from "../../types/containers";
 
 const methodList = ["밀링", "선반"];
 const materialList = ["알루미늄", "탄소강", "구리", "합금강", "강철"];
 
-function CheckList({ type, handleCheck, checkedList }: CheckListProps) {
+function CheckBoxContainer({ type, handleCheck, checkedList }: CheckBoxContainerProps) {
   if (type === "method") {
     return (
       <Wrapper>
@@ -57,7 +57,7 @@ function CheckList({ type, handleCheck, checkedList }: CheckListProps) {
   }
 }
 
-export default CheckList;
+export default CheckBoxContainer;
 
 const Wrapper = styled.div`
   display: flex;

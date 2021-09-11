@@ -1,15 +1,7 @@
-import { Component, ReactElement } from "react";
 import { Wrapper } from "./Filter.style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSortDown } from "@fortawesome/free-solid-svg-icons";
-
-export type FilterProps = {
-  handler?: () => void;
-  checkedList: { [key: string]: boolean };
-  component?: Component | ReactElement;
-  size: "small" | "medium";
-  className?: string;
-};
+import { FilterProps } from '../../types/components';
 
 function Filter({
   size = "small",

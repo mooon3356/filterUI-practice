@@ -1,13 +1,13 @@
-import CheckList from "../../containers/CheckList";
-import Modal from "../../components/Modal";
 import { useEffect, useState } from "react";
-import Filter from "../../components/Filter";
 import useDashboard from "../../hooks/useDashboard";
+import CheckBoxContainer from "../../containers/CheckBoxContainer";
+import { Container } from "./FilterContainer.style";
+import Modal from "../../components/Modal";
+import Filter from "../../components/Filter";
+import Toggle from "../../components/Toggle";
 import Button from "../../components/Button";
 import { reset } from "../../images";
-import Toggle from "../../components/Toggle";
-import { Container } from "./Filters.style";
-import { FiltersContainerType } from '../../types/containers';
+import { FilterContainerProps } from "../../types/containers";
 
 export type CheckedListType = {
   method: {
@@ -18,12 +18,7 @@ export type CheckedListType = {
   };
 };
 
-function FiltersContainer({
-  isOpen,
-  setIsOpen,
-  modalType,
-  setModalType,
-}: FiltersContainerType) {
+function FilterContainer({ modalState, setModalState }: FilterContainerProps) {
   const { onCheckFilter, onConsultingFilter } = useDashboard();
   const [functionType, setFunctionType] = useState("");
   const [toggle, setToggle] = useState(false);
@@ -65,14 +60,14 @@ function FiltersContainer({
   const handleReset = () => {
     setFunctionType("reset");
     setCheckedList({ method: {}, material: {} });
-    if (isOpen) setIsOpen(false);
-    if (toggle) setToggle(false);
+    setModalState({ method: false, material: false });
+    setToggle(false);
   };
 
   const handleToggle = () => {
     setFunctionType("toggle");
     setToggle(!toggle);
-    if (isOpen) setIsOpen(false);
+    setModalState({ material: false, method: false });
   };
 
   useEffect(() => {
@@ -92,14 +87,13 @@ function FiltersContainer({
   }, [toggle]);
 
   return (
-    <Container>
+    <Container onClick={(e) => e.stopPropagation()}>
       <div className="check-filters">
         <Filter
           className="filter"
           size="medium"
           handler={() => {
-            setIsOpen(!isOpen);
-            setModalType("method");
+            setModalState({ ...modalState, method: !modalState.method });
           }}
           checkedList={checkedList.method}
           component={
@@ -113,8 +107,7 @@ function FiltersContainer({
           className="filter"
           size="small"
           handler={() => {
-            setIsOpen(!isOpen);
-            setModalType("material");
+            setModalState({ ...modalState, material: !modalState.material });
           }}
           checkedList={checkedList.material}
           component={
@@ -141,37 +134,36 @@ function FiltersContainer({
         <div className="toggle-title">상담 중인 요청만 보기</div>
       </div>
 
-      {isOpen ? (
-        modalType === "method" ? (
-          <Modal
-            type="filter-method"
-            isOpen={isOpen}
-            handleModal={() => setIsOpen(!isOpen)}
-            component={
-              <CheckList
-                checkedList={checkedList}
-                type="method"
-                handleCheck={handleCheck}
-              ></CheckList>
-            }
-          ></Modal>
-        ) : (
-          <Modal
-            type="filter-material"
-            isOpen={isOpen}
-            handleModal={() => setIsOpen(!isOpen)}
-            component={
-              <CheckList
-                checkedList={checkedList}
-                type="meterial"
-                handleCheck={handleCheck}
-              ></CheckList>
-            }
-          ></Modal>
-        )
-      ) : null}
+      <Modal
+        type="filter-method"
+        isOpen={modalState.method}
+        handleModal={() =>
+          setModalState({ ...modalState, method: !modalState.method })
+        }
+        component={
+          <CheckBoxContainer
+            checkedList={checkedList}
+            type="method"
+            handleCheck={handleCheck}
+          ></CheckBoxContainer>
+        }
+      ></Modal>
+      <Modal
+        type="filter-material"
+        isOpen={modalState.material}
+        handleModal={() =>
+          setModalState({ ...modalState, material: !modalState.material })
+        }
+        component={
+          <CheckBoxContainer
+            checkedList={checkedList}
+            type="meterial"
+            handleCheck={handleCheck}
+          ></CheckBoxContainer>
+        }
+      ></Modal>
     </Container>
   );
 }
 
-export default FiltersContainer;
+export default FilterContainer;

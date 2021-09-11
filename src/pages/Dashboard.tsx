@@ -1,16 +1,23 @@
 import styled from "styled-components";
-import RequestCardList from "../containers/RequestCardList";
+import axios from "axios";
 import { useEffect, useState } from "react";
-import FiltersContainer from "../containers/Filters";
-import PageIntro from "../components/PageIntro";
 import useDashboard from "../hooks/useDashboard";
+import RequestCardContainer from "../containers/RequestCardContainer";
+import FilterContainer from "../containers/FilterContainer";
+import PageIntro from "../components/PageIntro";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
+
+export type ModalStateType = {
+  method: boolean;
+  material: boolean;
+};
 
 function DashboardPage() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [modalType, setModalType] = useState("");
+  const [modalState, setModalState] = useState<ModalStateType>({
+    method: false,
+    material: false,
+  });
   const { data, onStoreData } = useDashboard();
 
   useEffect(() => {
@@ -20,19 +27,23 @@ function DashboardPage() {
   }, []);
 
   return (
-    <Layout onClick={() => (isOpen ? setIsOpen(false) : null)}>
+    <Layout
+      onClick={() => {
+        if (modalState.method || modalState.material) {
+          setModalState({ method: false, material: false });
+        }
+      }}
+    >
       {!data.currentData ? (
         <FontAwesomeIcon className="spin-icon" icon={faSpinner} spin />
       ) : (
         <Container>
           <PageIntro />
-          <FiltersContainer
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
-            modalType={modalType}
-            setModalType={setModalType}
-          ></FiltersContainer>
-          <RequestCardList></RequestCardList>
+          <FilterContainer
+            modalState={modalState}
+            setModalState={setModalState}
+          ></FilterContainer>
+          <RequestCardContainer></RequestCardContainer>
         </Container>
       )}
     </Layout>

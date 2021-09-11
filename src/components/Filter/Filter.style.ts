@@ -35,7 +35,7 @@ export const Wrapper = styled.button<FilterProps>`
   border: 1px solid ${(props) => props.theme.gray.sub};
   border-radius: 4px;
   cursor: pointer;
-  z-index: 99;
+  z-index: 9999;
   display: flex;
   justify-content: center;
   align-items: center;
