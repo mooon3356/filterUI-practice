@@ -5,7 +5,6 @@ function Modal({ isOpen = false, component, handleModal, type }: ModalProps) {
   if (!isOpen) return null;
   return (
     <Wrapper isOpen={isOpen} type={type} onClick={handleModal}>
-      <div className="modal-overlay"></div>
       <ModalBox type={type} onClick={(e) => e.stopPropagation()}>
         {component}
       </ModalBox>

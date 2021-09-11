@@ -1,4 +1,5 @@
 import { CheckedListType } from "../containers/FilterContainer";
+import { ModalStateType } from "../pages/Dashboard";
 
 export type CheckBoxContainerProps = {
   type: string;
@@ -7,8 +8,6 @@ export type CheckBoxContainerProps = {
 };
 
 export type FilterContainerProps = {
-  isOpen: boolean;
-  modalType: string;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setModalType: React.Dispatch<React.SetStateAction<string>>;
+  modalState: ModalStateType;
+  setModalState: React.Dispatch<React.SetStateAction<ModalStateType>>;
 };

@@ -8,9 +8,16 @@ import PageIntro from "../components/PageIntro";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
+export type ModalStateType = {
+  method: boolean;
+  material: boolean;
+};
+
 function DashboardPage() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [modalType, setModalType] = useState("");
+  const [modalState, setModalState] = useState<ModalStateType>({
+    method: false,
+    material: false,
+  });
   const { data, onStoreData } = useDashboard();
 
   useEffect(() => {
@@ -20,17 +27,21 @@ function DashboardPage() {
   }, []);
 
   return (
-    <Layout onClick={() => (isOpen ? setIsOpen(false) : null)}>
+    <Layout
+      onClick={() => {
+        if (modalState.method || modalState.material) {
+          setModalState({ method: false, material: false });
+        }
+      }}
+    >
       {!data.currentData ? (
         <FontAwesomeIcon className="spin-icon" icon={faSpinner} spin />
       ) : (
         <Container>
           <PageIntro />
           <FilterContainer
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
-            modalType={modalType}
-            setModalType={setModalType}
+            modalState={modalState}
+            setModalState={setModalState}
           ></FilterContainer>
           <RequestCardContainer></RequestCardContainer>
         </Container>
