@@ -1,5 +1,5 @@
-import { ButtonProps } from "./index";
 import styled, { css } from "styled-components";
+import { ButtonProps } from "../../types/components";
 
 type SizeType = Pick<ButtonProps, "size">;
 type ColorType = Pick<ButtonProps, "color">;

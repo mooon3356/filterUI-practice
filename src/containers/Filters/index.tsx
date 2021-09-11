@@ -7,6 +7,7 @@ import Button from "../../components/Button";
 import { reset } from "../../images";
 import Toggle from "../../components/Toggle";
 import { Container } from "./Filters.style";
+import { FiltersContainerType } from '../../types/containers';
 
 export type CheckedListType = {
   method: {
@@ -15,13 +16,6 @@ export type CheckedListType = {
   material: {
     [key: string]: boolean;
   };
-};
-
-type FiltersContainerType = {
-  isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  modalType: string;
-  setModalType: React.Dispatch<React.SetStateAction<string>>;
 };
 
 function FiltersContainer({

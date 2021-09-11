@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { FilterProps } from "./index";
+import { FilterProps } from "../../types/components";
 
 type SizeType = Pick<FilterProps, "size">;
 type CheckedType = Pick<FilterProps, "checkedList">;

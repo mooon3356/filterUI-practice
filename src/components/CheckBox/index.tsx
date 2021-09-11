@@ -1,11 +1,5 @@
 import styled from "styled-components";
-
-type CheckBoxProps = {
-  el: string;
-  checked: boolean;
-  name: string;
-  handleCheck: (e: any) => void;
-};
+import { CheckBoxProps } from "../../types/components";
 
 function CheckBox({ el, checked, name, handleCheck }: CheckBoxProps) {
   if (checked) {

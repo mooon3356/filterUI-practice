@@ -1,12 +1,5 @@
-import { Component, ReactElement } from "react";
+import { ModalProps } from "../../types/components";
 import { ModalBox, Wrapper } from "./Modal.style";
-
-export type ModalProps = {
-  isOpen: boolean;
-  handleModal?: () => void;
-  component?: Component | ReactElement;
-  type?: string;
-};
 
 function Modal({ isOpen = false, component, handleModal, type }: ModalProps) {
   if (!isOpen) return null;

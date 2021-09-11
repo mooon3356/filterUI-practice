@@ -4,11 +4,7 @@ import Sidebar from "../Sidebar";
 import { Wrapper } from "./Nav.style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
-
-type NavProps = {
-  sideBar: boolean;
-  setSideBar: React.Dispatch<React.SetStateAction<boolean>>;
-};
+import { NavProps } from "../../types/components";
 
 function Nav({ sideBar, setSideBar }: NavProps) {
   return (

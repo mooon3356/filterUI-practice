@@ -1,9 +1,5 @@
+import { ToggleProps } from '../../types/components';
 import { Wrapper } from "./Toggle.style";
-
-export type ToggleProps = {
-  toggle: boolean;
-  handleToggle: () => void;
-};
 
 function Toggle({ toggle, handleToggle }: ToggleProps) {
   return (
