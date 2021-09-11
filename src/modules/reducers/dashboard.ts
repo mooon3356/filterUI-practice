@@ -38,9 +38,7 @@ function dashboard(
       const filtered = state.data?.filter((el) => {
         const fullList = [...el.method, ...el.material];
         for (let key in action.payload) {
-          if (!fullList.includes(key)) {
-            return false;
-          }
+          if (!fullList.includes(key)) return false;
         }
         return true;
       });

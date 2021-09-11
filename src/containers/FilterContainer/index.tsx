@@ -1,13 +1,13 @@
-import CheckList from "../../containers/CheckList";
-import Modal from "../../components/Modal";
 import { useEffect, useState } from "react";
-import Filter from "../../components/Filter";
 import useDashboard from "../../hooks/useDashboard";
+import CheckBoxContainer from "../../containers/CheckBoxContainer";
+import { Container } from "./FilterContainer.style";
+import Modal from "../../components/Modal";
+import Filter from "../../components/Filter";
+import Toggle from "../../components/Toggle";
 import Button from "../../components/Button";
 import { reset } from "../../images";
-import Toggle from "../../components/Toggle";
-import { Container } from "./Filters.style";
-import { FiltersContainerType } from '../../types/containers';
+import { FilterContainerProps } from "../../types/containers";
 
 export type CheckedListType = {
   method: {
@@ -18,12 +18,12 @@ export type CheckedListType = {
   };
 };
 
-function FiltersContainer({
+function FilterContainer({
   isOpen,
   setIsOpen,
   modalType,
   setModalType,
-}: FiltersContainerType) {
+}: FilterContainerProps) {
   const { onCheckFilter, onConsultingFilter } = useDashboard();
   const [functionType, setFunctionType] = useState("");
   const [toggle, setToggle] = useState(false);
@@ -148,11 +148,11 @@ function FiltersContainer({
             isOpen={isOpen}
             handleModal={() => setIsOpen(!isOpen)}
             component={
-              <CheckList
+              <CheckBoxContainer
                 checkedList={checkedList}
                 type="method"
                 handleCheck={handleCheck}
-              ></CheckList>
+              ></CheckBoxContainer>
             }
           ></Modal>
         ) : (
@@ -161,11 +161,11 @@ function FiltersContainer({
             isOpen={isOpen}
             handleModal={() => setIsOpen(!isOpen)}
             component={
-              <CheckList
+              <CheckBoxContainer
                 checkedList={checkedList}
                 type="meterial"
                 handleCheck={handleCheck}
-              ></CheckList>
+              ></CheckBoxContainer>
             }
           ></Modal>
         )
@@ -174,4 +174,4 @@ function FiltersContainer({
   );
 }
 
-export default FiltersContainer;
+export default FilterContainer;

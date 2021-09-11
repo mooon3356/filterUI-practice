@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import RequestCardList from "../containers/RequestCardList";
+import axios from "axios";
 import { useEffect, useState } from "react";
-import FiltersContainer from "../containers/Filters";
-import PageIntro from "../components/PageIntro";
 import useDashboard from "../hooks/useDashboard";
+import RequestCardContainer from "../containers/RequestCardContainer";
+import FilterContainer from "../containers/FilterContainer";
+import PageIntro from "../components/PageIntro";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
 
 function DashboardPage() {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,13 +26,13 @@ function DashboardPage() {
       ) : (
         <Container>
           <PageIntro />
-          <FiltersContainer
+          <FilterContainer
             isOpen={isOpen}
             setIsOpen={setIsOpen}
             modalType={modalType}
             setModalType={setModalType}
-          ></FiltersContainer>
-          <RequestCardList></RequestCardList>
+          ></FilterContainer>
+          <RequestCardContainer></RequestCardContainer>
         </Container>
       )}
     </Layout>

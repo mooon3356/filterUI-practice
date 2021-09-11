@@ -1,12 +1,12 @@
-import { CheckedListType } from "../containers/Filters";
+import { CheckedListType } from "../containers/FilterContainer";
 
-export type CheckListProps = {
+export type CheckBoxContainerProps = {
   type: string;
   handleCheck: (e: any) => void;
   checkedList: CheckedListType;
 };
 
-export type FiltersContainerType = {
+export type FilterContainerProps = {
   isOpen: boolean;
   modalType: string;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;

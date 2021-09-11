@@ -3,7 +3,7 @@ import useDashboard from "../../hooks/useDashboard";
 import RequestCard from "../../components/RequestCard";
 import EmptyBox from "../../components/EmptyBox";
 
-function RequestCardList() {
+function RequestCardContainer() {
   const { data } = useDashboard();
 
   if (!data.currentData) {
@@ -38,7 +38,7 @@ function RequestCardList() {
   }
 }
 
-export default RequestCardList;
+export default RequestCardContainer;
 
 const Container = styled.div<{ empty: boolean }>`
   gap: 1.5rem 1.5rem;
