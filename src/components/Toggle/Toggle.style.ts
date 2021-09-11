@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ToggleProps } from "./index";
+import { ToggleProps } from "../../types/components";
 
 export const Wrapper = styled.div<ToggleProps>`
   position: relative;

@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { slideLeft } from "../../styles/animation";
-import { ModalProps } from "./index";
+import { ModalProps } from "../../types/components";
 
 type ModalType = Pick<ModalProps, "type">;
 

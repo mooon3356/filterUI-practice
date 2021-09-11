@@ -1,13 +1,5 @@
-import { MouseEventHandler } from "react";
+import { ButtonProps } from '../../types/components';
 import { Wrapper } from "./Button.style";
-
-export type ButtonProps = {
-  children?: string;
-  handler?: MouseEventHandler<HTMLButtonElement> | undefined;
-  className?: string;
-  size?: "small" | "medium";
-  color?: "primary" | "white";
-};
 
 function Button({
   children,
