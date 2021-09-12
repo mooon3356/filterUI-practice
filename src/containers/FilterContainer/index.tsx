@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import useDashboard from "../../hooks/useDashboard";
 import CheckBoxContainer from "../../containers/CheckBoxContainer";
 import { Container } from "./FilterContainer.style";
 import Modal from "../../components/Modal";
@@ -8,6 +7,8 @@ import Toggle from "../../components/Toggle";
 import Button from "../../components/Button";
 import { reset } from "../../images";
 import { FilterContainerProps } from "../../types/containers";
+import { filterDashboardDataThunk } from "../../modules/dashboard";
+import { useDispatch } from "react-redux";
 
 export type CheckedListType = {
   method: {
@@ -19,7 +20,6 @@ export type CheckedListType = {
 };
 
 function FilterContainer({ modalState, setModalState }: FilterContainerProps) {
-  const { onCheckFilter, onConsultingFilter } = useDashboard();
   const [functionType, setFunctionType] = useState("");
   const [toggle, setToggle] = useState(false);
   const [checkedList, setCheckedList] = useState<CheckedListType>({
@@ -27,6 +27,7 @@ function FilterContainer({ modalState, setModalState }: FilterContainerProps) {
     material: {},
   });
   const { method, material } = checkedList;
+  const dispatch = useDispatch();
 
   let methodCount = Object.keys(method).length;
   let materialCount = Object.keys(material).length;
@@ -73,16 +74,22 @@ function FilterContainer({ modalState, setModalState }: FilterContainerProps) {
   useEffect(() => {
     if (functionType === "toggle") return;
     if (toggle) setToggle(false);
-    onCheckFilter({ ...method, ...material });
+
+    dispatch(filterDashboardDataThunk("check", { ...method, ...material }));
   }, [checkedList]);
 
   useEffect(() => {
-    if (functionType === "check") return;
-    if (methodCount === 0 && materialCount === 0) {
-      onConsultingFilter(toggle);
+    if (functionType === "check" || !functionType) return;
+
+    if (!toggle) {
+      dispatch(filterDashboardDataThunk("toggle-off"));
     } else {
-      setCheckedList({ method: {}, material: {} });
-      onConsultingFilter(toggle);
+      if (methodCount === 0 && materialCount === 0) {
+        dispatch(filterDashboardDataThunk("toggle-on"));
+      } else {
+        setCheckedList({ method: {}, material: {} });
+        dispatch(filterDashboardDataThunk("toggle-on"));
+      }
     }
   }, [toggle]);
 

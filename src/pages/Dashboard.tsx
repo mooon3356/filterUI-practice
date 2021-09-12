@@ -1,12 +1,13 @@
 import styled from "styled-components";
-import axios from "axios";
 import { useEffect, useState } from "react";
-import useDashboard from "../hooks/useDashboard";
 import RequestCardContainer from "../containers/RequestCardContainer";
 import FilterContainer from "../containers/FilterContainer";
 import PageIntro from "../components/PageIntro";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../modules/reducers";
+import { getDashboardDataThunk } from "../modules/dashboard";
 
 export type ModalStateType = {
   method: boolean;
@@ -14,16 +15,16 @@ export type ModalStateType = {
 };
 
 function DashboardPage() {
+  const dispatch = useDispatch();
+  const { loading } = useSelector((state: RootState) => state.dashboard.data);
+  
   const [modalState, setModalState] = useState<ModalStateType>({
     method: false,
     material: false,
   });
-  const { data, onStoreData } = useDashboard();
 
   useEffect(() => {
-    axios.get("http://localhost:4000/requests").then((data) => {
-      onStoreData(data.data);
-    });
+    dispatch(getDashboardDataThunk());
   }, []);
 
   return (
@@ -34,7 +35,7 @@ function DashboardPage() {
         }
       }}
     >
-      {!data.currentData ? (
+      {loading ? (
         <FontAwesomeIcon className="spin-icon" icon={faSpinner} spin />
       ) : (
         <Container>
