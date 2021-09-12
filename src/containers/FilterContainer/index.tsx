@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import useDashboard from "../../hooks/useDashboard";
 import CheckBoxContainer from "../../containers/CheckBoxContainer";
 import { Container } from "./FilterContainer.style";
 import Modal from "../../components/Modal";
