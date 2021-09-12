@@ -3,8 +3,11 @@ import {
   DASHBOARD_GET,
   DASHBOARD_GET_SUCCESS,
   DASHBOARD_GET_ERROR,
+  DASHBOARD_FILTER,
+  DASHBOARD_FILTER_SUCCESS,
+  DASHBOARD_FILTER_ERROR,
 } from "./actions";
-import { DashboardAction, DashboardState } from './types';
+import { DashboardAction, DashboardState } from "./types";
 
 const initialState: DashboardState = {
   data: {
@@ -39,6 +42,25 @@ const dashboard = createReducer<DashboardState, DashboardAction>(initialState, {
       data: null,
     },
   }),
+  [DASHBOARD_FILTER]: (state) => ({
+    ...state,
+  }),
+  [DASHBOARD_FILTER_SUCCESS]: (state, action) => ({
+    ...state,
+    data: {
+      loading: false,
+      error: null,
+      data: action.payload,
+    },
+  }),
+  [DASHBOARD_FILTER_ERROR]: (state, action) => ({
+    ...state,
+    data: {
+      loading: false,
+      error: action.payload,
+      data: null,
+    },
+  }),
 });
 
-export default dashboard
+export default dashboard;
