@@ -2,42 +2,23 @@ import styled from "styled-components";
 import { CheckBoxProps } from "../../types/components";
 
 function CheckBox({ el, checked, name, handleCheck }: CheckBoxProps) {
-  if (checked) {
-    return (
-      <Wrapper>
-        <label>
-          <input
-            onChange={(e) => {
-              handleCheck(e);
-            }}
-            className="check"
-            type="checkbox"
-            name={name}
-            value={el}
-            defaultChecked
-          />
-          {el}
-        </label>
-      </Wrapper>
-    );
-  } else {
-    return (
-      <Wrapper>
-        <label>
-          <input
-            onChange={(e) => {
-              handleCheck(e);
-            }}
-            className="check"
-            type="checkbox"
-            name={name}
-            value={el}
-          />
-          {el}
-        </label>
-      </Wrapper>
-    );
-  }
+  return (
+    <Wrapper>
+      <label>
+        <input
+          onChange={(e) => {
+            handleCheck(e);
+          }}
+          className="check"
+          type="checkbox"
+          name={name}
+          value={el}
+          defaultChecked={checked}
+        />
+        {el}
+      </label>
+    </Wrapper>
+  );
 }
 
 export default CheckBox;
