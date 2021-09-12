@@ -75,7 +75,8 @@ function FilterContainer({ modalState, setModalState }: FilterContainerProps) {
   useEffect(() => {
     if (functionType === "toggle") return;
     if (toggle) setToggle(false);
-    // onCheckFilter({ ...method, ...material });
+
+    dispatch(filterDashboardDataThunk("check", { ...method, ...material }));
   }, [checkedList]);
 
   useEffect(() => {
