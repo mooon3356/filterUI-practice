@@ -19,7 +19,6 @@ export type CheckedListType = {
 };
 
 function FilterContainer({ modalState, setModalState }: FilterContainerProps) {
-  const { onCheckFilter, onConsultingFilter } = useDashboard();
   const [functionType, setFunctionType] = useState("");
   const [toggle, setToggle] = useState(false);
   const [checkedList, setCheckedList] = useState<CheckedListType>({
@@ -73,16 +72,16 @@ function FilterContainer({ modalState, setModalState }: FilterContainerProps) {
   useEffect(() => {
     if (functionType === "toggle") return;
     if (toggle) setToggle(false);
-    onCheckFilter({ ...method, ...material });
+    // onCheckFilter({ ...method, ...material });
   }, [checkedList]);
 
   useEffect(() => {
     if (functionType === "check") return;
     if (methodCount === 0 && materialCount === 0) {
-      onConsultingFilter(toggle);
+      // onConsultingFilter(toggle);
     } else {
       setCheckedList({ method: {}, material: {} });
-      onConsultingFilter(toggle);
+      // onConsultingFilter(toggle);
     }
   }, [toggle]);
 

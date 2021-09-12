@@ -2,22 +2,24 @@ import styled from "styled-components";
 import useDashboard from "../../hooks/useDashboard";
 import RequestCard from "../../components/RequestCard";
 import EmptyBox from "../../components/EmptyBox";
+import { useSelector } from 'react-redux';
+import { RootState } from '../../modules/reducers';
 
 function RequestCardContainer() {
-  const { data } = useDashboard();
+  const { data, loading, error } = useSelector((state: RootState) => state.dashboard.data);
 
-  if (!data.currentData) {
+  if (!data) {
     return <></>;
   } else {
     return (
       <>
-        {data.currentData.length === 0 ? (
+        {data.length === 0 ? (
           <Container empty={true}>
             <EmptyBox/>
           </Container>
         ) : (
           <Container empty={false}>
-            {data.currentData.map((el) => (
+            {data.map((el) => (
               <RequestCard
                 key={el.id}
                 id={el.id}
