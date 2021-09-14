@@ -3,7 +3,7 @@ import { ModalStateType } from "../pages/Dashboard";
 
 export type CheckBoxContainerProps = {
   type: string;
-  handleCheck: (e: any) => void;
+  handleCheck: (e: React.ChangeEvent<HTMLInputElement>) => void;
   checkedList: CheckedListType;
 };
 

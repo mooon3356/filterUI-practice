@@ -32,7 +32,7 @@ function FilterContainer({ modalState, setModalState }: FilterContainerProps) {
   let methodCount = Object.keys(method).length;
   let materialCount = Object.keys(material).length;
 
-  const handleCheck = (e: any) => {
+  const handleCheck = (e:React.ChangeEvent<HTMLInputElement>) => {
     setFunctionType("check");
     const type = e.target.name;
     const value = e.target.value;

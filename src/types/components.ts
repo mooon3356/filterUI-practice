@@ -13,7 +13,7 @@ export type CheckBoxProps = {
   el: string;
   checked: boolean;
   name: string;
-  handleCheck: (e: any) => void;
+  handleCheck: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export type FilterProps = {
