@@ -52,7 +52,12 @@ const Container = styled.div<{ empty: boolean }>`
   justify-content: center;
   margin-bottom: 1rem;
 
+  @media ${({ theme }) => theme.device.tablet} {
+    grid-template-columns: repeat(2, 1fr);
+  };
+  
   @media ${({ theme }) => theme.device.mobile} {
     grid-template-columns: 1fr;
-  }
+  };
+
 `;

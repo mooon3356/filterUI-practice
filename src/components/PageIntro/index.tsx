@@ -16,6 +16,7 @@ export default PageIntro;
 const Wrapper = styled.div`
   width: 100%;
   height: 16%;
+  margin-bottom: 3rem;
 
   .description {
     font-size: 1.5rem;

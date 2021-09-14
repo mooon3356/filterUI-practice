@@ -17,7 +17,7 @@ export type ModalStateType = {
 function DashboardPage() {
   const dispatch = useDispatch();
   const { loading } = useSelector((state: RootState) => state.dashboard.data);
-  
+
   const [modalState, setModalState] = useState<ModalStateType>({
     method: false,
     material: false,
@@ -70,18 +70,11 @@ const Layout = styled.div`
 
 const Container = styled.div`
   position: absolute;
-  top: 6%;
+  top: 8%;
   width: 70%;
-  height: 94%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding-top: 2rem;
 
   @media ${({ theme }) => theme.device.mobile} {
     width: 80%;
-    top: 5%;
     display: block;
   }
 `;

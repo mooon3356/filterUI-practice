@@ -25,8 +25,6 @@ declare module "styled-components" {
     device: {
       mobile: string;
       tablet: string;
-      laptop: string;
-    }
-  
+    };
   }
 }

@@ -15,7 +15,7 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 15%;
+  height: 10rem;
   font-size: 1.4rem;
   border-radius: 4px;
   color: ${(props) => props.theme.gray.sub};
