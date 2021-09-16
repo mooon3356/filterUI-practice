@@ -2,14 +2,13 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   position: relative;
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  width: 100%;
+  height: 100%;
 
   font-size: 1.4rem;
-  line-height: 2.3rem;
   padding: 1.3rem 1.5rem;
   border-radius: 4px;
   background: ${(props) => props.theme.gray.light};

@@ -1,13 +1,8 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import RequestCardContainer from "../containers/RequestCardContainer";
 import FilterContainer from "../containers/FilterContainer";
 import PageIntro from "../components/PageIntro";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../modules/reducers";
-import { getDashboardDataThunk } from "../modules/dashboard";
 
 export type ModalStateType = {
   method: boolean;
@@ -15,17 +10,10 @@ export type ModalStateType = {
 };
 
 function DashboardPage() {
-  const dispatch = useDispatch();
-  const { loading } = useSelector((state: RootState) => state.dashboard.data);
-
   const [modalState, setModalState] = useState<ModalStateType>({
     method: false,
     material: false,
   });
-
-  useEffect(() => {
-    dispatch(getDashboardDataThunk());
-  }, []);
 
   return (
     <Layout
@@ -35,18 +23,14 @@ function DashboardPage() {
         }
       }}
     >
-      {loading ? (
-        <FontAwesomeIcon className="spin-icon" icon={faSpinner} spin />
-      ) : (
-        <Container>
-          <PageIntro />
-          <FilterContainer
-            modalState={modalState}
-            setModalState={setModalState}
-          ></FilterContainer>
-          <RequestCardContainer></RequestCardContainer>
-        </Container>
-      )}
+      <Container>
+        <PageIntro />
+        <FilterContainer
+          modalState={modalState}
+          setModalState={setModalState}
+        ></FilterContainer>
+        <RequestCardContainer></RequestCardContainer>
+      </Container>
     </Layout>
   );
 }
@@ -60,12 +44,6 @@ const Layout = styled.div`
   justify-content: center;
   position: relative;
   z-index: 9;
-
-  .spin-icon {
-    position: absolute;
-    top: 45%;
-    font-size: 5rem;
-  }
 `;
 
 const Container = styled.div`
