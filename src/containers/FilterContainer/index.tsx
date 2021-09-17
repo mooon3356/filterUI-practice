@@ -8,7 +8,8 @@ import Button from "../../components/Button";
 import { reset } from "../../images";
 import { FilterContainerProps } from "../../types/containers";
 import { filterDashboardDataThunk } from "../../modules/dashboard";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../modules/reducers";
 
 export type CheckedListType = {
   method: {
@@ -19,7 +20,12 @@ export type CheckedListType = {
   };
 };
 
-function FilterContainer({ modalState, setModalState }: FilterContainerProps) {
+function FilterContainer({
+  modalState,
+  setModalState,
+  itemIndexEnd,
+}: FilterContainerProps) {
+  const { data } = useSelector((state: RootState) => state.dashboard.data);
   const [functionType, setFunctionType] = useState("");
   const [toggle, setToggle] = useState(false);
   const [checkedList, setCheckedList] = useState<CheckedListType>({
@@ -32,7 +38,7 @@ function FilterContainer({ modalState, setModalState }: FilterContainerProps) {
   let methodCount = Object.keys(method).length;
   let materialCount = Object.keys(material).length;
 
-  const handleCheck = (e:React.ChangeEvent<HTMLInputElement>) => {
+  const handleCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFunctionType("check");
     const type = e.target.name;
     const value = e.target.value;
@@ -72,23 +78,32 @@ function FilterContainer({ modalState, setModalState }: FilterContainerProps) {
   };
 
   useEffect(() => {
-    if (functionType === "toggle") return;
-    if (toggle) setToggle(false);
+    if (data) {
+      if (functionType === "toggle") return;
+      if (toggle) setToggle(false);
 
-    dispatch(filterDashboardDataThunk("check", { ...method, ...material }));
+      dispatch(
+        filterDashboardDataThunk(itemIndexEnd, "check", {
+          ...method,
+          ...material,
+        })
+      );
+    }
   }, [checkedList]);
 
   useEffect(() => {
-    if (functionType === "check" || !functionType) return;
+    if (data) {
+      if (functionType === "check" || !functionType) return;
 
-    if (!toggle) {
-      dispatch(filterDashboardDataThunk("toggle-off"));
-    } else {
-      if (methodCount === 0 && materialCount === 0) {
-        dispatch(filterDashboardDataThunk("toggle-on"));
+      if (!toggle) {
+        dispatch(filterDashboardDataThunk(itemIndexEnd, "toggle-off"));
       } else {
-        setCheckedList({ method: {}, material: {} });
-        dispatch(filterDashboardDataThunk("toggle-on"));
+        if (methodCount === 0 && materialCount === 0) {
+          dispatch(filterDashboardDataThunk(itemIndexEnd, "toggle-on"));
+        } else {
+          setCheckedList({ method: {}, material: {} });
+          dispatch(filterDashboardDataThunk(itemIndexEnd, "toggle-on"));
+        }
       }
     }
   }, [toggle]);

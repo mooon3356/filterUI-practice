@@ -14,6 +14,10 @@ function DashboardPage() {
     method: false,
     material: false,
   });
+  const [itemIndex, setItemIndex] = useState({
+    start: 0,
+    end: 9,
+  });
 
   return (
     <Layout
@@ -28,8 +32,12 @@ function DashboardPage() {
         <FilterContainer
           modalState={modalState}
           setModalState={setModalState}
+          itemIndexEnd={itemIndex.end}
         ></FilterContainer>
-        <RequestCardContainer></RequestCardContainer>
+        <RequestCardContainer
+          itemIndex={itemIndex}
+          setItemIndex={setItemIndex}
+        ></RequestCardContainer>
       </Container>
     </Layout>
   );

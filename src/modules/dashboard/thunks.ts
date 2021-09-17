@@ -4,17 +4,17 @@ import { getDashboardDataAsync, filterDashboardDataAsync } from "./actions";
 import { getDashboardData } from "../../api/dashboard";
 import { DashboardAction } from "./types";
 
-export function getDashboardDataThunk(): ThunkAction<
-  void,
-  RootState,
-  null,
-  DashboardAction
-> {
+export function getDashboardDataThunk(
+  start: number,
+  end: number
+): ThunkAction<void, RootState, null, DashboardAction> {
   return async (dispatch) => {
     const { request, success, failure } = getDashboardDataAsync;
-    dispatch(request());
+    console.log('get 액션 들어감')
+    dispatch(request())
     try {
-      const dashboardData = await getDashboardData();
+      console.log('get success 액션 들어감')
+      const dashboardData = await getDashboardData(start, end);
       dispatch(success(dashboardData));
     } catch (error: any) {
       dispatch(failure(error));
@@ -23,13 +23,16 @@ export function getDashboardDataThunk(): ThunkAction<
 }
 
 export function filterDashboardDataThunk(
-  type: string, checkedList?: {[key:string]:boolean}
+  end: number,
+  type: string,
+  checkedList?: { [key: string]: boolean }
 ): ThunkAction<void, RootState, null, DashboardAction> {
   return async (dispatch) => {
     const { request, success, failure } = filterDashboardDataAsync;
+    console.log('여기 실행됨')
     dispatch(request());
     try {
-      const dashboardData = await getDashboardData();
+      const dashboardData = await getDashboardData(0, end);
       const consultingData = dashboardData.filter((el) => {
         return el.status === "상담중";
       });
@@ -45,7 +48,7 @@ export function filterDashboardDataThunk(
         dispatch(success(consultingData));
       } else if (type === "toggle-off") {
         dispatch(success(dashboardData));
-      } else if (type === 'check') {
+      } else if (type === "check") {
         dispatch(success(checkedData));
       }
     } catch (error: any) {
