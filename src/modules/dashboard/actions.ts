@@ -14,7 +14,7 @@ export const getDashboardDataAsync = createAsyncAction(
   DASHBOARD_GET,
   DASHBOARD_GET_SUCCESS,
   DASHBOARD_GET_ERROR
-)<undefined, Data[], AxiosError>();
+)<null, Data[], AxiosError>();
 
 export const filterDashboardDataAsync = createAsyncAction(
   DASHBOARD_FILTER,

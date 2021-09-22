@@ -3,24 +3,9 @@ import { ThunkAction } from "redux-thunk";
 import { getDashboardDataAsync, filterDashboardDataAsync } from "./actions";
 import { getDashboardData } from "../../api/dashboard";
 import { DashboardAction } from "./types";
+import createAsyncThunk from '../../utils/createAsyncThunk';
 
-export function getDashboardDataThunk(): ThunkAction<
-  void,
-  RootState,
-  null,
-  DashboardAction
-> {
-  return async (dispatch) => {
-    const { request, success, failure } = getDashboardDataAsync;
-    dispatch(request());
-    try {
-      const dashboardData = await getDashboardData();
-      dispatch(success(dashboardData));
-    } catch (error: any) {
-      dispatch(failure(error));
-    }
-  };
-}
+export const getDashboardDataThunk = createAsyncThunk(getDashboardDataAsync, getDashboardData)
 
 export function filterDashboardDataThunk(
   type: string, checkedList?: {[key:string]:boolean}

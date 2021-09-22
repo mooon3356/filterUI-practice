@@ -48,7 +48,7 @@ function RequestCardContainer() {
                   status={el.status}
                 ></RequestCard>
               ))}
-            <div className="end"></div>
+            {/* <div className="end"></div> */}
           </Container>
         )}
       </>

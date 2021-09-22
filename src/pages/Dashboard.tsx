@@ -28,8 +28,8 @@ function DashboardPage() {
         <FilterContainer
           modalState={modalState}
           setModalState={setModalState}
-        ></FilterContainer>
-        <RequestCardContainer></RequestCardContainer>
+        />
+        <RequestCardContainer />
       </Container>
     </Layout>
   );
