@@ -32,7 +32,7 @@ function FilterContainer({ modalState, setModalState }: FilterContainerProps) {
   let methodCount = Object.keys(method).length;
   let materialCount = Object.keys(material).length;
 
-  const handleCheck = (e:React.ChangeEvent<HTMLInputElement>) => {
+  const handleCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFunctionType("check");
     const type = e.target.name;
     const value = e.target.value;
@@ -62,7 +62,6 @@ function FilterContainer({ modalState, setModalState }: FilterContainerProps) {
     setFunctionType("reset");
     setCheckedList({ method: {}, material: {} });
     setModalState({ method: false, material: false });
-    setToggle(false);
   };
 
   const handleToggle = () => {
@@ -72,24 +71,28 @@ function FilterContainer({ modalState, setModalState }: FilterContainerProps) {
   };
 
   useEffect(() => {
-    if (functionType === "toggle") return;
-    if (toggle) setToggle(false);
-
-    dispatch(filterDashboardDataThunk("check", { ...method, ...material }));
+    dispatch(
+      filterDashboardDataThunk("check", toggle, { ...method, ...material })
+    );
   }, [checkedList]);
 
   useEffect(() => {
     if (functionType === "check" || !functionType) return;
 
-    if (!toggle) {
-      dispatch(filterDashboardDataThunk("toggle-off"));
+    if (toggle) {
+      dispatch(
+        filterDashboardDataThunk("toggle", toggle, {
+          ...method,
+          ...material,
+        })
+      );
     } else {
-      if (methodCount === 0 && materialCount === 0) {
-        dispatch(filterDashboardDataThunk("toggle-on"));
-      } else {
-        setCheckedList({ method: {}, material: {} });
-        dispatch(filterDashboardDataThunk("toggle-on"));
-      }
+      dispatch(
+        filterDashboardDataThunk("toggle", toggle, {
+          ...method,
+          ...material,
+        })
+      );
     }
   }, [toggle]);
 
