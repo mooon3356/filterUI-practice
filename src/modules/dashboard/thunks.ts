@@ -10,54 +10,65 @@ export const getDashboardDataThunk = createAsyncThunk(
   getDashboardData
 );
 
-export function filterDashboardDataThunk(
-  type?: string,
-  toggle?: boolean,
-  checkedList?: { [key: string]: boolean }
+export function checkFilterThunk(
+  toggle: boolean,
+  checkedList: { [key: string]: boolean }
 ): ThunkAction<void, RootState, null, DashboardAction> {
   return async (dispatch) => {
     const { request, success, failure } = filterDashboardDataAsync;
     dispatch(request());
     try {
       const dashboardData = await getDashboardData();
-      let consultingData = dashboardData.filter((el) => {
+      const consultingData = dashboardData.filter((el) => {
         return el.status === "상담중";
       });
-      let checkedData = dashboardData.filter((el) => {
+
+      let checkTargetData = toggle ? consultingData : dashboardData;
+
+      const checkedData = checkTargetData.filter((el) => {
         const fullList = [...el.method, ...el.material];
         for (let key in checkedList) {
           if (!fullList.includes(key)) return false;
         }
         return true;
       });
-      let checkTargetData =
-        type === "check" && toggle ? consultingData : dashboardData;
+      dispatch(success(checkedData));
+    } catch (error: any) {
+      dispatch(failure(error));
+    }
+  };
+}
 
-      if (type === "check") {
-        checkedData = checkTargetData.filter((el) => {
-          const fullList = [...el.method, ...el.material];
-          for (let key in checkedList) {
-            if (!fullList.includes(key)) return false;
-          }
-          return true;
-        });
-        dispatch(success(checkedData));
+export function consultingFilterThunk(
+  toggle: boolean,
+  checkedList: { [key: string]: boolean }
+): ThunkAction<void, RootState, null, DashboardAction> {
+  return async (dispatch) => {
+    const { request, success, failure } = filterDashboardDataAsync;
+    dispatch(request());
+    try {
+      const dashboardData = await getDashboardData();
+      const checkedData = dashboardData.filter((el) => {
+        const fullList = [...el.method, ...el.material];
+        for (let key in checkedList) {
+          if (!fullList.includes(key)) return false;
+        }
+        return true;
+      });
+
+      const consultingTargetData =
+        Object.keys(checkedList).length > 0 ? checkedData : dashboardData;
+      const consultingData = consultingTargetData.filter((el) => {
+        return el.status === "상담중";
+      });
+
+      if (toggle) {
+        dispatch(success(consultingData));
       } else {
-        if (toggle) {
-          if (checkedList) {
-            consultingData = checkedData.filter((el) => {
-              return el.status === "상담중";
-            });
-            dispatch(success(consultingData));
-          } else {
-            dispatch(success(dashboardData));
-          }
+        if (Object.keys(checkedData).length > 0) {
+          dispatch(success(checkedData));
         } else {
-          if (checkedList && Object.keys(checkedList).length > 0) {
-            dispatch(success(checkedData));
-          } else {
-            dispatch(success(dashboardData));
-          }
+          dispatch(success(dashboardData));
         }
       }
     } catch (error: any) {
