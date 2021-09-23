@@ -19,8 +19,8 @@ function RequestCardContainer() {
   if (loading || error) {
     return (
       <Container empty={false}>
-        {Array(6).fill(0).map(() => (
-          <div className="skeleton-card"></div>
+        {Array(6).fill(0).map((el, idx) => (
+          <div key={idx+1} className="skeleton-card"></div>
         ))}
       </Container>
     );
@@ -48,7 +48,6 @@ function RequestCardContainer() {
                   status={el.status}
                 ></RequestCard>
               ))}
-            <div className="end"></div>
           </Container>
         )}
       </>

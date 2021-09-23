@@ -3,27 +3,16 @@ import { ThunkAction } from "redux-thunk";
 import { getDashboardDataAsync, filterDashboardDataAsync } from "./actions";
 import { getDashboardData } from "../../api/dashboard";
 import { DashboardAction } from "./types";
+import createAsyncThunk from "../../utils/createAsyncThunk";
 
-export function getDashboardDataThunk(): ThunkAction<
-  void,
-  RootState,
-  null,
-  DashboardAction
-> {
-  return async (dispatch) => {
-    const { request, success, failure } = getDashboardDataAsync;
-    dispatch(request());
-    try {
-      const dashboardData = await getDashboardData();
-      dispatch(success(dashboardData));
-    } catch (error: any) {
-      dispatch(failure(error));
-    }
-  };
-}
+export const getDashboardDataThunk = createAsyncThunk(
+  getDashboardDataAsync,
+  getDashboardData
+);
 
-export function filterDashboardDataThunk(
-  type: string, checkedList?: {[key:string]:boolean}
+export function checkFilterThunk(
+  toggle: boolean,
+  checkedList: { [key: string]: boolean }
 ): ThunkAction<void, RootState, null, DashboardAction> {
   return async (dispatch) => {
     const { request, success, failure } = filterDashboardDataAsync;
@@ -33,6 +22,32 @@ export function filterDashboardDataThunk(
       const consultingData = dashboardData.filter((el) => {
         return el.status === "상담중";
       });
+
+      let checkTargetData = toggle ? consultingData : dashboardData;
+
+      const checkedData = checkTargetData.filter((el) => {
+        const fullList = [...el.method, ...el.material];
+        for (let key in checkedList) {
+          if (!fullList.includes(key)) return false;
+        }
+        return true;
+      });
+      dispatch(success(checkedData));
+    } catch (error: any) {
+      dispatch(failure(error));
+    }
+  };
+}
+
+export function consultingFilterThunk(
+  toggle: boolean,
+  checkedList: { [key: string]: boolean }
+): ThunkAction<void, RootState, null, DashboardAction> {
+  return async (dispatch) => {
+    const { request, success, failure } = filterDashboardDataAsync;
+    dispatch(request());
+    try {
+      const dashboardData = await getDashboardData();
       const checkedData = dashboardData.filter((el) => {
         const fullList = [...el.method, ...el.material];
         for (let key in checkedList) {
@@ -41,12 +56,20 @@ export function filterDashboardDataThunk(
         return true;
       });
 
-      if (type === "toggle-on") {
+      const consultingTargetData =
+        Object.keys(checkedList).length > 0 ? checkedData : dashboardData;
+      const consultingData = consultingTargetData.filter((el) => {
+        return el.status === "상담중";
+      });
+
+      if (toggle) {
         dispatch(success(consultingData));
-      } else if (type === "toggle-off") {
-        dispatch(success(dashboardData));
-      } else if (type === 'check') {
-        dispatch(success(checkedData));
+      } else {
+        if (Object.keys(checkedData).length > 0) {
+          dispatch(success(checkedData));
+        } else {
+          dispatch(success(dashboardData));
+        }
       }
     } catch (error: any) {
       dispatch(failure(error));
