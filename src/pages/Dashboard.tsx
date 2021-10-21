@@ -1,58 +1,41 @@
 import styled from "styled-components";
-import { useState } from "react";
 import RequestCardContainer from "../containers/RequestCardContainer";
 import FilterContainer from "../containers/FilterContainer";
 import PageIntro from "../components/PageIntro";
+import { useState } from "react";
 
-export type ModalStateType = {
+export type checkBoxType = {
   method: boolean;
   material: boolean;
 };
 
 function DashboardPage() {
-  const [modalState, setModalState] = useState<ModalStateType>({
+  const [checkBox, setCheckBox] = useState({
     method: false,
     material: false,
   });
 
   return (
     <Layout
+      checkBox={checkBox}
       onClick={() => {
-        if (modalState.method || modalState.material) {
-          setModalState({ method: false, material: false });
-        }
+        setCheckBox({ method: false, material: false });
       }}
     >
-      <Container>
-        <PageIntro />
-        <FilterContainer
-          modalState={modalState}
-          setModalState={setModalState}
-        />
-        <RequestCardContainer />
-      </Container>
+      <PageIntro />
+      <FilterContainer checkBox={checkBox} setCheckBox={setCheckBox} />
+      <RequestCardContainer />
     </Layout>
   );
 }
 
 export default DashboardPage;
 
-const Layout = styled.div`
-  width: 100%;
-  height: 100vh;
+const Layout = styled.div<{ checkBox: checkBoxType }>`
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  position: relative;
-  z-index: 9;
-`;
-
-const Container = styled.div`
-  position: absolute;
-  top: 8%;
-  width: 70%;
-
-  @media ${({ theme }) => theme.device.mobile} {
-    width: 80%;
-    display: block;
-  }
+  align-items: center;
+  margin-top: 4rem;
+  z-index: 0;
 `;

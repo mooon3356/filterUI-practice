@@ -3,7 +3,7 @@ import styled from "styled-components";
 function EmptyBox() {
   return (
     <Wrapper>
-      <div> 조건에 맞는 견적 요청이 없습니다.</div>
+      <strong>There is no request you are looking for.</strong>
     </Wrapper>
   );
 }
@@ -16,8 +16,12 @@ const Wrapper = styled.div`
   align-items: center;
   width: 100%;
   height: 10rem;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   border-radius: 4px;
   color: ${(props) => props.theme.gray.sub};
   border: 1px solid ${(props) => props.theme.border.gray};
+
+  strong {
+    font-weight: normal;
+  }
 `;

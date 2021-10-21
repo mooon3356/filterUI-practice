@@ -1,51 +1,54 @@
 import styled, { css } from "styled-components";
-import { ButtonProps } from "../../types/components";
+import { ButtonProps } from ".";
 
-type SizeType = Pick<ButtonProps, "size">;
-type ColorType = Pick<ButtonProps, "color">;
-
-const sizeStyles = css<SizeType>`
-  ${({ size }) =>
-    size === "small" &&
-    css`
-      width: 6rem;
-      height: 3rem;
-    `}
-
-  ${({ size }) =>
-    size === "medium" &&
-    css`
-      width: 8.5rem;
-      height: 3rem;
-    `}
+const primaryButtonStyle = css`
+  background: ${({ theme }) => theme.primary[500]};
+  color: ${({ theme }) => theme.gray.light};
+  border: none;
 `;
 
-const colorStyles = css<ColorType>`
-  ${({ color }) =>
-    color === "primary" &&
-    css`
-      background: ${(props) => props.theme.primary[500]};
-      color: ${(props) => props.theme.gray.light};
-      border: 1px solid ${(props) => props.theme.primary[500]};
-    `}
-
-  ${({ color }) =>
-    color === "white" &&
-    css`
-      background: ${(props) => props.theme.gray.light};
-      color: ${(props) => props.theme.primary[500]};
-      border: 1px solid ${(props) => props.theme.primary[500]};
-    `}
+const outlinedButtonStyle = css`
+  background: white;
+  color: ${({ theme }) => theme.primary[500]};
+  border: 1px solid ${({ theme }) => theme.primary[500]};
 `;
+
+const sizeSmall = css`
+  width: 5rem;
+  height: 2.5rem;
+`;
+
+const sizeMedium = css`
+  width: 7rem;
+  height: 2.5rem;
+`;
+
+function setButtonStyle(btnStyle: string) {
+  switch (btnStyle) {
+    case "primary":
+      return primaryButtonStyle;
+    case "outlined":
+      return outlinedButtonStyle;
+  }
+}
+
+function setButtonSize(size: string) {
+  switch (size) {
+    case "small":
+      return sizeSmall;
+    case "medium":
+      return sizeMedium;
+  }
+}
 
 export const Wrapper = styled.button<ButtonProps>`
-  border-radius: 2px;
-  padding: 0.5rem;
-  font-size: 1.2rem;
-  cursor: pointer;
-  font-weight: 500;
   z-index: 9999;
+  padding: 0.5rem;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
 
-  ${sizeStyles};
-  ${colorStyles};
+  ${({ btnStyle }) => setButtonStyle(btnStyle)};
+  ${({ size }) => setButtonSize(size)};
 `;

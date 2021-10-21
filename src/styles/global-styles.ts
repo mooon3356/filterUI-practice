@@ -4,9 +4,13 @@ import { normalize } from "styled-normalize";
 const GlobalStyle = createGlobalStyle`
     ${normalize}
 
+    * {
+    box-sizing: border-box;
+    font-family: "Noto Sans KR", sans-serif;
+  }
+
     html {
-        font-size: 10px; 
-        color: ${props => props.theme.gray.default};
+        color: ${(props) => props.theme.gray.default};
     }
 
     body {
@@ -16,11 +20,6 @@ const GlobalStyle = createGlobalStyle`
     code {
       font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
         monospace;
-    }
-    
-    * {
-      box-sizing: border-box;
-      font-family: Noto Sans KR;
     }
 `;
 

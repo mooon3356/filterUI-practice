@@ -1,14 +1,14 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: relative;
+  width: 70%;
 
   .filter {
-    margin-right: 1rem;
+    margin-right: 0.5rem;
   }
 
   .reset-box {
@@ -17,13 +17,12 @@ export const Container = styled.div`
   }
 
   .reset-icon {
-    width: 1rem;
+    width: 0.8rem;
   }
 
   .reset {
+    width: 4rem;
     border: none;
-    width: 7rem;
-    font-weight: normal;
   }
 
   .check-filters {
@@ -37,7 +36,24 @@ export const Container = styled.div`
 
   .toggle-title {
     padding-left: 1rem;
-    font-size: 1.3rem;
+    font-size: 0.9rem;
+  }
+
+  @media ${({ theme }) => theme.device.tablet} {
+    flex-direction: column;
+
+    .reset-box {
+      display: none;
+    }
+
+    .check-filters {
+      width: 100%;
+      margin-bottom: 2rem;
+    }
+
+    .toggle-box {
+      width: 100%;
+    }
   }
 
   @media ${({ theme }) => theme.device.mobile} {

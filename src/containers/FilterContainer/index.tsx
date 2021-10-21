@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
-import CheckBoxContainer from "../../containers/CheckBoxContainer";
 import { Container } from "./FilterContainer.style";
-import Modal from "../../components/Modal";
 import Filter from "../../components/Filter";
 import Toggle from "../../components/Toggle";
 import Button from "../../components/Button";
 import { reset } from "../../images";
-import { FilterContainerProps } from "../../types/containers";
 import {
   checkFilterThunk,
   consultingFilterThunk,
 } from "../../modules/dashboard";
 import { useDispatch } from "react-redux";
+import { checkBoxType } from "../../pages/Dashboard";
+import CheckBoxContainer from "../CheckBoxContainer";
 
 export type CheckedListType = {
   method: {
@@ -22,7 +21,12 @@ export type CheckedListType = {
   };
 };
 
-function FilterContainer({ modalState, setModalState }: FilterContainerProps) {
+export type FilterContainerProps = {
+  checkBox: checkBoxType;
+  setCheckBox: React.Dispatch<React.SetStateAction<checkBoxType>>;
+};
+
+function FilterContainer({ checkBox, setCheckBox }: FilterContainerProps) {
   const [toggle, setToggle] = useState(false);
   const [checkedList, setCheckedList] = useState<CheckedListType>({
     method: {},
@@ -57,16 +61,17 @@ function FilterContainer({ modalState, setModalState }: FilterContainerProps) {
       newMaterial[value] = true;
       setCheckedList({ ...checkedList, material: newMaterial });
     }
+
+    e.stopPropagation();
   };
 
   const handleReset = () => {
     setCheckedList({ method: {}, material: {} });
-    setModalState({ method: false, material: false });
+    setCheckBox({ method: false, material: false });
   };
 
   const handleToggle = () => {
     setToggle(!toggle);
-    setModalState({ material: false, method: false });
   };
 
   useEffect(() => {
@@ -83,81 +88,71 @@ function FilterContainer({ modalState, setModalState }: FilterContainerProps) {
   }, [toggle]);
 
   return (
-    <Container onClick={((e) => e.stopPropagation())}>
+    <Container>
       <div className="check-filters">
         <Filter
           className="filter"
-          size="medium"
-          handler={() => {
-            setModalState({ ...modalState, method: !modalState.method });
-          }}
+          // size="medium"
           checkedList={checkedList.method}
+          handler={() => {
+            setCheckBox({ ...checkBox, method: !checkBox.method });
+          }}
           component={
             <span>
-              가공방식
+              Method
               {methodCount >= 1 && `(${methodCount})`}
             </span>
           }
         ></Filter>
+
+        {checkBox.method ? (
+          <CheckBoxContainer
+            checkedList={checkedList}
+            type="method"
+            handleCheck={handleCheck}
+          ></CheckBoxContainer>
+        ) : null}
+
         <Filter
           className="filter"
-          size="small"
-          handler={() => {
-            setModalState({ ...modalState, material: !modalState.material });
-          }}
+          // size="small"
           checkedList={checkedList.material}
+          handler={() =>
+            setCheckBox({ ...checkBox, material: !checkBox.material })
+          }
           component={
             <span>
-              재료
+              Material
               {materialCount >= 1 && `(${materialCount})`}
             </span>
           }
         ></Filter>
+
+        {checkBox.material ? (
+          <CheckBoxContainer
+            checkedList={checkedList}
+            type="meterial"
+            handleCheck={handleCheck}
+          ></CheckBoxContainer>
+        ) : null}
+
         <div className="reset-box">
           <img className="reset-icon" src={reset}></img>
           <Button
             handler={handleReset}
             size="medium"
             className="reset"
-            color={"white"}
+            btnStyle={"outlined"}
           >
-            필터링 리셋
+            Reset
           </Button>
         </div>
       </div>
+
       <div className="toggle-box">
         <Toggle toggle={toggle} handleToggle={handleToggle}></Toggle>
-        <div className="toggle-title">상담 중인 요청만 보기</div>
+        <div className="toggle-title">Filter consulting requests</div>
       </div>
-
-      <Modal
-        type="filter-method"
-        isOpen={modalState.method}
-        handleModal={() =>
-          setModalState({ ...modalState, method: !modalState.method })
-        }
-        component={
-          <CheckBoxContainer
-            checkedList={checkedList}
-            type="method"
-            handleCheck={handleCheck}
-          ></CheckBoxContainer>
-        }
-      ></Modal>
-      <Modal
-        type="filter-material"
-        isOpen={modalState.material}
-        handleModal={() =>
-          setModalState({ ...modalState, material: !modalState.material })
-        }
-        component={
-          <CheckBoxContainer
-            checkedList={checkedList}
-            type="meterial"
-            handleCheck={handleCheck}
-          ></CheckBoxContainer>
-        }
-      ></Modal>
     </Container>
   );
 }

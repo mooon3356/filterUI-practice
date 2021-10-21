@@ -20,7 +20,7 @@ export function checkFilterThunk(
     try {
       const dashboardData = await getDashboardData();
       const consultingData = dashboardData.filter((el) => {
-        return el.status === "상담중";
+        return el.status === "Consulting";
       });
 
       let checkTargetData = toggle ? consultingData : dashboardData;
@@ -59,7 +59,7 @@ export function consultingFilterThunk(
       const consultingTargetData =
         Object.keys(checkedList).length > 0 ? checkedData : dashboardData;
       const consultingData = consultingTargetData.filter((el) => {
-        return el.status === "상담중";
+        return el.status === "Consulting";
       });
 
       if (toggle) {

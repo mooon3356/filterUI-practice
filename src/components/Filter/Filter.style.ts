@@ -1,10 +1,7 @@
 import styled, { css } from "styled-components";
-import { FilterProps } from "../../types/components";
+import { FilterProps, CheckedType } from ".";
 
-type SizeType = Pick<FilterProps, "size">;
-type CheckedType = Pick<FilterProps, "checkedList">;
-
-const checkedStypes = css<CheckedType>`
+const checkedStyles = css<CheckedType>`
   ${(props) =>
     Object.keys(props.checkedList).length >= 1 &&
     css`
@@ -14,35 +11,37 @@ const checkedStypes = css<CheckedType>`
     `}
 `;
 
-const sizeStyles = css<SizeType>`
-  ${({ size }) =>
-    size === "small" &&
-    css`
-      width: 7.6rem;
-      height: 3.2rem;
-    `}
+// const sizeStyles = css<SizeType>`
+//   ${({ size }) =>
+//     size === "small" &&
+//     css`
+//       width: 7rem;
+//       height: 2.5rem;
+//     `}
 
-  ${({ size }) =>
-    size === "medium" &&
-    css`
-      width: 9.8rem;
-      height: 3.2rem;
-    `}
-`;
+//   ${({ size }) =>
+//     size === "medium" &&
+//     css`
+//       width: 8rem;
+//       height: 2.5rem;
+//     `}
+// `;
 
 export const Wrapper = styled.button<FilterProps>`
-  background: ${(props) => props.theme.gray.light};
-  border: 1px solid ${(props) => props.theme.gray.sub};
-  border-radius: 4px;
-  cursor: pointer;
-  z-index: 9999;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.2rem;
+  position: relative;
+  z-index: 999;
+  width: 8rem;
+  height: 2.5rem;
+  background: ${(props) => props.theme.gray.light};
+  border: 1px solid ${(props) => props.theme.gray.sub};
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
 
-  ${sizeStyles};
-  ${checkedStypes};
+  ${checkedStyles};
 
   .arrow-icon {
     width: 1rem;

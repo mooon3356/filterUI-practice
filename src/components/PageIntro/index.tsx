@@ -3,23 +3,25 @@ import styled from "styled-components";
 function PageIntro() {
   return (
     <Wrapper>
-      <h1>들어온 요청</h1>
-      <div className="description">
-        파트너님에게 딱 맞는 요청서를 찾아보세요.
-      </div>
+      <h1>Requests</h1>
+      <h2>Find requests you have received from your partners. </h2>
     </Wrapper>
   );
 }
 
 export default PageIntro;
 
-const Wrapper = styled.div`
-  width: 100%;
-  height: 16%;
-  margin-bottom: 3rem;
+const Wrapper = styled.header`
+  width: 70%;
+  margin-bottom: 2rem;
 
-  .description {
+  h1 {
     font-size: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+    font-weight: normal;
   }
 
   @media ${({ theme }) => theme.device.mobile} {
