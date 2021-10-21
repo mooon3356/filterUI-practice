@@ -18,7 +18,7 @@ function RequestCardContainer() {
 
   if (loading || error) {
     return (
-      <Container empty={false}>
+      <Container empty={false} type="skeleton">
         {Array(6)
           .fill(0)
           .map((el, idx) => (
